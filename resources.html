@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recursos | Asociación Manuela Cortés</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Menú lateral -->
+    <aside class="side-menu" id="sideMenu">
+      <button class="close-btn" id="closeMenu" aria-label="Cerrar menú">
+        &times;
+      </button>
+      <nav class="side-nav">
+        <a href="index.html">Introducción</a>
+        <a href="resources.html">Recursos</a>
+        <a href="news.html">Actividades y noticias</a>
+        <a href="staff.html">Staff only</a>
+      </nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Header -->
+    <header class="main-header">
+      <div class="header-top">
+        <button class="menu-btn" id="openMenu" aria-label="Abrir menú">
+          ☰
+        </button>
+
+        <div class="brand">
+          <img
+            src="img/logo.png"
+            alt="Logo de la Asociación Manuela Cortés"
+            class="logo"
+          />
+          <div class="brand-text">
+            <p class="brand-name">Asociación Manuela Cortés</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero recursos -->
+      <section class="resources-hero">
+        <div class="container">
+          <p class="hero-tag">Materiales educativos y divulgativos</p>
+          <h1>Recursos</h1>
+          <p>
+            En esta sección se recopilan materiales relacionados con las obras
+            de la asociación: guías didácticas, documentos informativos,
+            dossiers y otros recursos de apoyo.
+          </p>
+        </div>
+      </section>
+
+      <!-- Filtros por obra -->
+      <section class="section">
+        <div class="container">
+          <div class="resource-filters" aria-label="Filtrar recursos por obra">
+            <button class="resource-filter active" data-filter="all">
+              Todos
+            </button>
+            <button class="resource-filter" data-filter="padre">
+              El Padre
+            </button>
+            <button class="resource-filter" data-filter="espejo">
+              Ante El Espejo
+            </button>
+            <button class="resource-filter" data-filter="ruisenor">
+              Afonía de un ruiseñor
+            </button>
+            <button class="resource-filter" data-filter="antigona">
+              Antígona Eterna
+            </button>
+          </div>
+
+          <!-- 
+            Los grupos de recursos se pintan desde JavaScript.
+            Esto deja la página preparada para conectarla a Supabase:
+            resources puede venir de una tabla y pdfUrl de Supabase Storage.
+          -->
+          <div id="resourcesContainer"></div>
+
+          <p class="no-events-message" id="noResourcesMessage">
+            Actualmente no hay recursos disponibles para esta obra.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="main-footer">
+      <div class="container">
+        <h2>Contacto</h2>
+        <p>Email: asociacion@ejemplo.org</p>
+        <p>Teléfono: 000 000 000</p>
+        <p>Dirección: Sevilla, España</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+      // =========================
+      // SUPABASE CONFIG
+      // =========================
+
+      const SUPABASE_URL = "https://nfkhxixdybkuuppehmsa.supabase.co";
+      const SUPABASE_ANON_KEY =
+        "sb_publishable_ttCWQoFtIrFpZW7RGut8VA_uqzv0dp4";
+
+      const supabaseClient = supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY,
+      );
+
+      // =========================
+      // MENÚ LATERAL
+      // =========================
+
+      const openMenu = document.getElementById("openMenu");
+      const closeMenu = document.getElementById("closeMenu");
+      const sideMenu = document.getElementById("sideMenu");
+      const overlay = document.getElementById("overlay");
+
+      openMenu.addEventListener("click", () => {
+        sideMenu.classList.add("active");
+        overlay.classList.add("active");
+      });
+
+      closeMenu.addEventListener("click", () => {
+        sideMenu.classList.remove("active");
+        overlay.classList.remove("active");
+      });
+
+      overlay.addEventListener("click", () => {
+        sideMenu.classList.remove("active");
+        overlay.classList.remove("active");
+      });
+
+      // =========================
+      // RECURSOS DESDE SUPABASE
+      // =========================
+
+      const worksMeta = {
+        padre: {
+          title: "El Padre",
+          description:
+            "Recursos relacionados con la sensibilización sobre demencias seniles.",
+        },
+        espejo: {
+          title: "Ante El Espejo",
+          description:
+            "Recursos relacionados con la sensibilización sobre violencia de género.",
+        },
+        ruisenor: {
+          title: "Afonía de un ruiseñor",
+          description:
+            "Recursos vinculados a la obra y a su propuesta de sensibilización.",
+        },
+        antigona: {
+          title: "Antígona Eterna",
+          description:
+            "Recursos sobre memoria, reconocimiento y el papel de las mujeres en la historia.",
+        },
+      };
+
+      const worksOrder = ["padre", "espejo", "ruisenor", "antigona"];
+
+      const resourcesContainer = document.getElementById("resourcesContainer");
+      const noResourcesMessage = document.getElementById("noResourcesMessage");
+      const filterButtons = document.querySelectorAll(".resource-filter");
+
+      let activeResourceFilter = "all";
+      let resourcesItems = [];
+
+      function escapeHTML(text = "") {
+        return String(text)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function normalizeResourceItem(item) {
+        return {
+          id: item.id,
+          work: item.work_slug,
+          workTitle: item.work_title,
+          type: item.resource_type || "PDF",
+          title: item.title || "Recurso sin título",
+          description:
+            item.description || "Descripción pendiente de completar.",
+          pdfUrl: item.pdf_url,
+          coverImageUrl: item.cover_image_url || null,
+        };
+      }
+
+      async function loadResources() {
+        const { data, error } = await supabaseClient
+          .from("resources")
+          .select("*")
+          .eq("is_published", true)
+          .order("created_at", { ascending: false });
+
+        if (error) {
+          console.error("Error cargando recursos desde Supabase:", error);
+
+          resourcesContainer.innerHTML = `
+        <section class="resource-work-group">
+          <div class="resource-group-header">
+            <h2>No se pudieron cargar los recursos</h2>
+            <p>Ha ocurrido un problema al conectar con la base de datos.</p>
+          </div>
+        </section>
+      `;
+
+          noResourcesMessage.classList.remove("active");
+          return [];
+        }
+
+        console.log("Recursos cargados desde Supabase:", data);
+
+        return data.map(normalizeResourceItem);
+      }
+
+      function getPreviewUrl(pdfUrl) {
+        return `${pdfUrl}#page=1&toolbar=0`;
+      }
+
+      function createResourcePreview(resource) {
+        if (resource.coverImageUrl) {
+          return `
+        <div class="pdf-preview">
+          <img
+            src="${escapeHTML(resource.coverImageUrl)}"
+            alt="Portada de ${escapeHTML(resource.title)}"
+          />
+        </div>
+      `;
+        }
+
+        return `
+      <div class="pdf-preview">
+        <iframe
+          src="${escapeHTML(getPreviewUrl(resource.pdfUrl))}"
+          title="Vista previa PDF ${escapeHTML(resource.title)}"
+        ></iframe>
+      </div>
+    `;
+      }
+
+      function createResourceCard(resource) {
+        const article = document.createElement("article");
+        article.className = "resource-card";
+        article.dataset.work = resource.work;
+
+        article.innerHTML = `
+      ${createResourcePreview(resource)}
+
+      <div class="resource-card-content">
+        <p class="resource-tag">${escapeHTML(resource.type)}</p>
+        <h3>${escapeHTML(resource.title)}</h3>
+        <p>${escapeHTML(resource.description)}</p>
+
+        <div class="resource-actions">
+          <a
+            href="${escapeHTML(resource.pdfUrl)}"
+            target="_blank"
+            class="btn btn-small"
+            rel="noopener noreferrer"
+          >Abrir PDF</a>
+          <a
+            href="${escapeHTML(resource.pdfUrl)}"
+            download
+            class="resource-download"
+          >Descargar</a>
+        </div>
+      </div>
+    `;
+
+        return article;
+      }
+
+      function getWorkMeta(workKey, resourcesForWork) {
+        if (worksMeta[workKey]) {
+          return worksMeta[workKey];
+        }
+
+        const firstResource = resourcesForWork[0];
+
+        return {
+          title: firstResource?.workTitle || "Obra sin título",
+          description: "Recursos relacionados con esta obra.",
+        };
+      }
+
+      function renderResources() {
+        resourcesContainer.innerHTML = "";
+
+        const allWorkKeysFromResources = [
+          ...new Set(resourcesItems.map((resource) => resource.work)),
+        ];
+
+        const orderedWorkKeys = [
+          ...worksOrder.filter((workKey) =>
+            allWorkKeysFromResources.includes(workKey),
+          ),
+          ...allWorkKeysFromResources.filter(
+            (workKey) => !worksOrder.includes(workKey),
+          ),
+        ];
+
+        const visibleWorkKeys =
+          activeResourceFilter === "all"
+            ? orderedWorkKeys
+            : [activeResourceFilter];
+
+        let visibleResourcesCount = 0;
+
+        visibleWorkKeys.forEach((workKey) => {
+          const workResources = resourcesItems.filter(
+            (resource) => resource.work === workKey,
+          );
+
+          if (workResources.length === 0) return;
+
+          visibleResourcesCount += workResources.length;
+
+          const workMeta = getWorkMeta(workKey, workResources);
+
+          const group = document.createElement("section");
+          group.className = "resource-work-group";
+          group.dataset.work = workKey;
+
+          group.innerHTML = `
+        <div class="resource-group-header">
+          <h2>${escapeHTML(workMeta.title)}</h2>
+          <p>${escapeHTML(workMeta.description)}</p>
+        </div>
+
+        <div class="resources-grid"></div>
+      `;
+
+          const grid = group.querySelector(".resources-grid");
+
+          workResources.forEach((resource) => {
+            grid.appendChild(createResourceCard(resource));
+          });
+
+          resourcesContainer.appendChild(group);
+        });
+
+        if (visibleResourcesCount === 0) {
+          noResourcesMessage.classList.add("active");
+        } else {
+          noResourcesMessage.classList.remove("active");
+        }
+      }
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          activeResourceFilter = button.dataset.filter;
+
+          filterButtons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+
+          renderResources();
+        });
+      });
+
+      async function initResourcesPage() {
+        resourcesItems = await loadResources();
+        renderResources();
+      }
+
+      initResourcesPage();
+    </script>
+  </body>
+</html>

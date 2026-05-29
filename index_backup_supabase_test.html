@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asociación Manuela Cortés</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Menú lateral -->
+  <aside class="side-menu" id="sideMenu">
+    <button class="close-btn" id="closeMenu" aria-label="Cerrar menú">&times;</button>
+    <nav class="side-nav">
+      <a href="index.html">Introducción</a>
+      <a href="resources.html">Recursos</a>
+      <a href="news.html">Actividades y noticias</a>
+      <a href="staff.html">Staff only</a>
+    </nav>
+  </aside>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Header / nav horizontal -->
+<header class="main-header">
+  <div class="header-top">
+    <button class="menu-btn" id="openMenu" aria-label="Abrir menú">☰</button>
+
+    <div class="brand">
+      <img src="img/logo.png" alt="Logo de la Asociación Manuela Cortés" class="logo">
+      <div class="brand-text">
+        <p class="brand-name">Asociación Manuela Cortés</p>
+      </div>
+    </div>
+  </div>
+
+  <nav class="top-nav" id="topNav">
+    <a href="#hero">Sobre nosotros</a>
+    <a href="#obras">Obras</a>
+    <a href="#eventos">Eventos</a>
+    <a href="#logo">Nuestro logo</a>
+  </nav>
+</header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <p class="hero-tag">Compromiso, memoria y acción social</p>
+        <h1>Asociación Manuela Cortés</h1>
+        <p class="hero-text">
+          Agrupación de personas que pretenden fomentar la utilización de los métodos expresivo-dramáticos como medios educativos y de sensibilización y concienciación sobre temáticas sociales.
+          Algunas de las técnicas utilizadas son el teatro, movimiento corporal, música, danza, pintura, fotografía o cualquier otra metodología que ayude a lograr los objetivos planteados…
+        </p>
+        <div class="hero-buttons" role="tablist" aria-label="Sobre nosotros">
+          <button id="tab-mision" class="btn btn-tab btn-tab--active" role="tab" aria-selected="true" aria-controls="panel-mision">Misión</button>
+          <button id="tab-valores" class="btn btn-tab" role="tab" aria-selected="false" aria-controls="panel-valores">Valores</button>
+          <button id="tab-equipo" class="btn btn-tab" role="tab" aria-selected="false" aria-controls="panel-equipo">Equipo</button>
+        </div>
+
+        <!-- Paneles de pestañas -->
+        <div class="tab-panels">
+          <div id="panel-mision" class="tab-panel tab-panel--active" role="tabpanel" aria-labelledby="tab-mision">
+            <h3>Nuestra misión</h3>
+            <p>Fomentamos el uso de métodos expresivo-dramáticos como herramienta educativa y de sensibilización social, promoviendo la igualdad, la memoria histórica y la concienciación ciudadana a través del arte.</p>
+          </div>
+          <div id="panel-valores" class="tab-panel" role="tabpanel" aria-labelledby="tab-valores">
+            <h3>Nuestros valores</h3>
+            <p>Nos guiamos por el compromiso, la creatividad, la solidaridad y el feminismo. Creemos en el poder transformador del arte colectivo y en la dignidad de cada persona que forma parte de nuestra comunidad.</p>
+          </div>
+          <div id="panel-equipo" class="tab-panel" role="tabpanel" aria-labelledby="tab-equipo">
+            <h3>Nuestro equipo</h3>
+            <p>Somos un grupo diverso de personas con vocación artística y social: actores, educadores, músicos y activistas unidos por el deseo de generar cambio a través de la expresión creativa.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OBRAS EN CARRUSEL -->
+    <section class="section" id="obras">
+      <div class="container">
+        <h2 class="section-title">Nuestras obras</h2>
+        <p class="section-subtitle">
+          Algunas de las iniciativas y proyectos que forman parte de nuestra labor.
+        </p>
+
+        <div class="carousel">
+          <button class="carousel-btn prev" id="prevCard" aria-label="Obra anterior">&#10094;</button>
+
+          <div class="carousel-track-container">
+            <div class="carousel-track" id="carouselTrack">
+              <article class="card active">
+                <div class="card-text">
+                  <h3>El Padre</h3>
+                  <p>Sensibilización sobre la problemática social que provocan las Demencias Seniles.</p>
+                  <button class="card-link work-open-btn" data-work="padre">Saber más</button>
+                </div>
+                <div class="card-image">
+                  <img src="img/portada_padre.jpg" alt="Obra 1">
+                </div>
+              </article>
+
+              <article class="card">
+                <div class="card-text">
+                  <h3>Ante El Espejo</h3>
+                  <p>Sensibilización sobre la problemática de la violencia de género.</p>
+                  <button class="card-link work-open-btn" data-work="espejo">Saber más</button>
+                </div>
+                <div class="card-image">
+                  <img src="img/portada_espejo.jpg" alt="Obra 2">
+                </div>
+              </article>
+
+              <article class="card">
+                <div class="card-text">
+                  <h3>Afonía de un ruiseñor</h3>
+                  <p>Breve descripción del proyecto.</p>
+                  <button class="card-link work-open-btn" data-work="ruisenor">Saber más</button>
+                </div>
+                <div class="card-image">
+                  <img src="img/portada_ruiseñor.jpg" alt="Obra 3">
+                </div>
+              </article>
+
+              <article class="card">
+                <div class="card-text">
+                  <h3>Antígona Eterna</h3>
+                  <p>Superación de la brecha de reconocimiento que a través de la historia han sufrido las mujeres por el hecho de ser mujeres.</p>
+                  <button class="card-link work-open-btn" data-work="antigona">Saber más</button>
+                </div>
+                <div class="card-image">
+                  <img src="img/portada_antigona.jpg" alt="Obra 4">
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <button class="carousel-btn next" id="nextCard" aria-label="Siguiente obra">&#10095;</button>
+        </div>
+      </div>
+    </section>
+
+  <!-- Eventos -->
+<section class="section alt-section" id="eventos">
+  <div class="container">
+    <h2 class="section-title">Próximos eventos</h2>
+    <p class="section-subtitle">
+      Consulta las próximas actividades en las que participará la asociación.
+    </p>
+
+    <div class="events-list" id="eventsList">
+
+      <article class="event-item" data-date="2026-05-15">
+        <div class="event-main">
+          <div>
+            <p class="event-date">15 mayo 2026</p>
+            <h3>Representación teatral</h3>
+            <p>Sevilla</p>
+          </div>
+
+          <button class="btn btn-small event-info-btn" type="button">
+            Más información
+          </button>
+        </div>
+
+        <div class="event-details">
+          <p><strong>Obra:</strong> El Padre</p>
+          <p><strong>Lugar:</strong> Centro Cultural de Sevilla</p>
+          <p><strong>Hora:</strong> 19:30</p>
+        </div>
+      </article>
+
+      <article class="event-item" data-date="2026-05-28">
+        <div class="event-main">
+          <div>
+            <p class="event-date">28 mayo 2026</p>
+            <h3>Encuentro escénico</h3>
+            <p>Dos Hermanas</p>
+          </div>
+
+          <button class="btn btn-small event-info-btn" type="button">
+            Más información
+          </button>
+        </div>
+
+        <div class="event-details">
+          <p><strong>Obra:</strong> Ante El Espejo</p>
+          <p><strong>Lugar:</strong> Teatro Municipal de Dos Hermanas</p>
+          <p><strong>Hora:</strong> 20:00</p>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="no-events-message" id="noEventsMessage">
+      Actualmente no hay próximos eventos programados.
+    </p>
+  </div>
+</section>
+
+    <!-- Logo -->
+<section class="section" id="logo">
+  <div class="container logo-section">
+    
+    <div class="logo-interactive">
+      <!-- Capa 1: Logo base en blanco -->
+      <img src="img/logo_blanco.png" alt="Logo Asociación Manuela Cortés" class="logo-layer logo-base">
+      
+      <!-- Capa 2: Color morado (recortado a la izquierda) -->
+      <div class="logo-layer logo-color logo-color--purple" data-side="purple">
+        <img src="img/logo_morado.png" alt="">
+        <div class="keywords keywords--purple">
+          <span>Feminidad</span>
+          <span>Feminismo</span>
+          <span>Paradas</span>
+          <span>Memoria</span>
+        </div>
+      </div>
+      
+      <!-- Capa 3: Color verde (recortado a la derecha) -->
+      <div class="logo-layer logo-color logo-color--green" data-side="green">
+        <img src="img/logo_verde.png" alt="">
+        <div class="keywords keywords--green">
+          <span>Esperanza</span>
+          <span>Creatividad</span>
+          <span>Campo andaluz</span>
+          <span>Generosidad</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="logo-text-box">
+      <h2 class="section-title">El significado de nuestro logo</h2>
+      <p class="logo-intro">
+        Símbolo de cambio y transformación, como la propia Asociación que irá mutando a través de los diferentes proyectos, así como expresión de la libertad de creación. También sugiere la unión de dos personas representando el carácter colaborativo de la propuesta asociativa.
+      </p>
+      <p><strong>Pasa el ratón por el logo</strong> para descubrir qué simboliza cada color.</p>
+    </div>
+    
+  </div>
+</section>
+
+<!-- MODAL DETALLE DE OBRA -->
+<div class="work-modal" id="workModal" aria-hidden="true">
+  <div class="work-modal__overlay" id="workModalOverlay"></div>
+
+  <section class="work-modal__content" role="dialog" aria-modal="true" aria-labelledby="workModalTitle">
+    <button class="work-modal__close" id="workModalClose" aria-label="Cerrar ventana">&times;</button>
+
+    <div class="work-modal__grid">
+      <!-- Slides -->
+      <div class="work-slider">
+        <button class="work-slider__btn work-slider__btn--prev" id="workSlidePrev" aria-label="Imagen anterior">&#10094;</button>
+
+        <div class="work-slider__image-box">
+          <img id="workModalImage" src="" alt="">
+        </div>
+
+        <button class="work-slider__btn work-slider__btn--next" id="workSlideNext" aria-label="Imagen siguiente">&#10095;</button>
+
+        <div class="work-slider__dots" id="workSliderDots"></div>
+      </div>
+
+      <!-- Texto -->
+      <div class="work-detail">
+        <p class="work-detail__tag">Obra de la asociación</p>
+        <h2 id="workModalTitle">Título de la obra</h2>
+        <p id="workModalDescription">
+          Descripción extensa de la obra.
+        </p>
+      </div>
+    </div>
+
+    <!-- Comentarios -->
+    <div class="work-comments">
+      <div class="work-comments__header">
+        <h3>Comentarios y reseñas</h3>
+        <p>Comparte tu opinión sobre esta obra.</p>
+      </div>
+
+      <form class="review-form" id="reviewForm">
+        <div class="review-form__row">
+          <input type="text" id="reviewName" placeholder="Tu nombre" required>
+
+          <div class="star-rating" id="starRating" aria-label="Valoración con estrellas">
+            <button type="button" data-value="1" aria-label="1 estrella">★</button>
+            <button type="button" data-value="2" aria-label="2 estrellas">★</button>
+            <button type="button" data-value="3" aria-label="3 estrellas">★</button>
+            <button type="button" data-value="4" aria-label="4 estrellas">★</button>
+            <button type="button" data-value="5" aria-label="5 estrellas">★</button>
+          </div>
+        </div>
+
+        <textarea id="reviewText" placeholder="Escribe tu reseña..." required></textarea>
+
+        <button type="submit" class="btn review-submit">Publicar comentario</button>
+      </form>
+
+      <div class="reviews-list" id="reviewsList">
+        <p class="reviews-empty">Aún no hay comentarios. Sé la primera persona en escribir una reseña.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+  <!-- Footer -->
+  <footer class="main-footer" id="contacto">
+    <div class="container">
+      <h2>Contacto</h2>
+      <p>Email: asociacion@ejemplo.org</p>
+      <p>Teléfono: 000 000 000</p>
+      <p>Dirección: Sevilla, España</p>
+    </div>
+  </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+// SUPABASE CONFIG
+const SUPABASE_URL = "https://nfkhxixdybkuuppehmsa.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_ttCWQoFtIrFpZW7RGut8VA_uqzv0dp4";
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const openMenu = document.getElementById("openMenu");
+  const closeMenu = document.getElementById("closeMenu");
+  const sideMenu = document.getElementById("sideMenu");
+  const overlay = document.getElementById("overlay");
+
+  openMenu.addEventListener("click", () => {
+    sideMenu.classList.add("active");
+    overlay.classList.add("active");
+  });
+
+  closeMenu.addEventListener("click", () => {
+    sideMenu.classList.remove("active");
+    overlay.classList.remove("active");
+  });
+
+  overlay.addEventListener("click", () => {
+    sideMenu.classList.remove("active");
+    overlay.classList.remove("active");
+  });
+
+  const topNav = document.getElementById("topNav");
+
+  let lastScrollY = window.scrollY;
+  let navHidden = false;
+  let downDistance = 0;
+  let upDistance = 0;
+
+  const TOP_SAFE_ZONE = 80;     // Cerca de arriba siempre visible
+  const HIDE_TRIGGER = 30;      // Hay que bajar al menos esto para ocultarlo
+  const SHOW_TRIGGER = 40;      // Hay que subir al menos esto para mostrarlo
+
+  window.addEventListener("scroll", () => {
+    const currentScrollY = window.scrollY;
+    const delta = currentScrollY - lastScrollY;
+
+    // Si estamos cerca del top, el nav siempre se ve
+    if (currentScrollY <= TOP_SAFE_ZONE) {
+      topNav.classList.remove("hide");
+      navHidden = false;
+      downDistance = 0;
+      upDistance = 0;
+      lastScrollY = currentScrollY;
+      return;
+    }
+
+    // Ignorar microcambios casi imperceptibles
+    if (Math.abs(delta) < 2) {
+      lastScrollY = currentScrollY;
+      return;
+    }
+
+    if (delta > 0) {
+      // Bajando
+      downDistance += delta;
+      upDistance = 0;
+
+      if (!navHidden && downDistance >= HIDE_TRIGGER) {
+        topNav.classList.add("hide");
+        navHidden = true;
+        downDistance = 0;
+      }
+    } else {
+      // Subiendo
+      upDistance += Math.abs(delta);
+      downDistance = 0;
+
+      if (navHidden && upDistance >= SHOW_TRIGGER) {
+        topNav.classList.remove("hide");
+        navHidden = false;
+        upDistance = 0;
+      }
+    }
+
+    lastScrollY = currentScrollY;
+  });
+
+  const cards = document.querySelectorAll(".carousel-track .card");
+  const prevBtn = document.getElementById("prevCard");
+  const nextBtn = document.getElementById("nextCard");
+
+  let currentCard = 0;
+  let isAnimating = false;
+
+  function goToCard(newIndex, direction) {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    const oldCard = cards[currentCard];
+    const newCard = cards[newIndex];
+
+    oldCard.classList.remove("active");
+
+    const animClass = direction === "next" ? "slide-in-right" : "slide-in-left";
+    newCard.classList.add(animClass);
+
+    newCard.addEventListener("animationend", () => {
+      newCard.classList.remove(animClass);
+      newCard.classList.add("active");
+      currentCard = newIndex;
+      isAnimating = false;
+    }, { once: true });
+  }
+
+  nextBtn.addEventListener("click", () => {
+    goToCard((currentCard + 1) % cards.length, "next");
+  });
+
+  prevBtn.addEventListener("click", () => {
+    goToCard((currentCard - 1 + cards.length) % cards.length, "prev");
+  });
+  // --- Logo interactivo: split hover por mitad ---
+  const logoInteractive = document.querySelector('.logo-interactive');
+  const purpleLayer    = document.querySelector('.logo-color--purple');
+  const greenLayer     = document.querySelector('.logo-color--green');
+
+  if (logoInteractive && purpleLayer && greenLayer) {
+    logoInteractive.addEventListener('mousemove', (e) => {
+      const rect = logoInteractive.getBoundingClientRect();
+      const relX  = e.clientX - rect.left;
+      const relY  = (e.clientY - rect.top) / rect.height; // 0→1
+      // Línea diagonal: de 58% arriba a 42% abajo
+      const boundary = rect.width * (0.58 - 0.16 * relY);
+      if (relX < boundary) {
+        purpleLayer.classList.add('active');
+        greenLayer.classList.remove('active');
+      } else {
+        greenLayer.classList.add('active');
+        purpleLayer.classList.remove('active');
+      }
+    });
+
+    logoInteractive.addEventListener('mouseleave', () => {
+      purpleLayer.classList.remove('active');
+      greenLayer.classList.remove('active');
+    });
+  }
+
+  // --- Pestañas "Sobre nosotros" ---
+  const tabBtns = document.querySelectorAll('[role="tab"]');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('aria-controls');
+
+      // Desactivar todos
+      tabBtns.forEach(b => {
+        b.classList.remove('btn-tab--active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      tabPanels.forEach(p => p.classList.remove('tab-panel--active'));
+
+      // Activar el pulsado
+      btn.classList.add('btn-tab--active');
+      btn.setAttribute('aria-selected', 'true');
+      const panel = document.getElementById(targetId);
+      panel.classList.add('tab-panel--active');
+    });
+  });
+
+    // --- Modal de obras con slider y reseñas ---
+  const worksData = {
+    padre: {
+      title: "El Padre",
+      description: "Aquí puedes escribir una descripción más extensa de la obra El Padre. Puedes explicar su temática, el enfoque social, el proceso creativo, el mensaje principal y el impacto que busca generar en el público.",
+      images: [
+        "img/portada_padre.jpg",
+        "img/padre_1.jpg",
+        "img/padre_2.jpg"
+      ]
+    },
+    espejo: {
+      title: "Ante El Espejo",
+      description: "Aquí puedes escribir una descripción más extensa de Ante El Espejo. Puedes hablar de la violencia de género, la sensibilización social, el lenguaje escénico y el propósito educativo de la obra.",
+      images: [
+        "img/portada_espejo.jpg",
+        "img/espejo_1.jpg",
+        "img/espejo_2.jpg"
+      ]
+    },
+    ruisenor: {
+      title: "Afonía de un ruiseñor",
+      description: "Aquí puedes escribir una descripción más extensa de Afonía de un ruiseñor. Puedes desarrollar el significado del título, la problemática tratada y el mensaje emocional de la obra.",
+      images: [
+        "img/portada_ruiseñor.jpg",
+        "img/ruisenor_1.jpg",
+        "img/ruisenor_2.jpg"
+      ]
+    },
+    antigona: {
+      title: "Antígona Eterna",
+      description: "Aquí puedes escribir una descripción más extensa de Antígona Eterna. Puedes explicar su relación con la memoria, el papel de las mujeres en la historia y la necesidad de reconocimiento social.",
+      images: [
+        "img/portada_antigona.jpg",
+        "img/antigona_1.jpg",
+        "img/antigona_2.jpg"
+      ]
+    }
+  };
+
+  const workModal = document.getElementById("workModal");
+  const workModalOverlay = document.getElementById("workModalOverlay");
+  const workModalClose = document.getElementById("workModalClose");
+  const workModalTitle = document.getElementById("workModalTitle");
+  const workModalDescription = document.getElementById("workModalDescription");
+  const workModalImage = document.getElementById("workModalImage");
+  const workSlidePrev = document.getElementById("workSlidePrev");
+  const workSlideNext = document.getElementById("workSlideNext");
+  const workSliderDots = document.getElementById("workSliderDots");
+  const workOpenBtns = document.querySelectorAll(".work-open-btn");
+
+  const reviewForm = document.getElementById("reviewForm");
+  const reviewName = document.getElementById("reviewName");
+  const reviewText = document.getElementById("reviewText");
+  const reviewsList = document.getElementById("reviewsList");
+  const starButtons = document.querySelectorAll("#starRating button");
+
+  let activeWorkKey = null;
+  let activeSlide = 0;
+  let selectedRating = 0;
+
+  // Las reseñas se guardan en localStorage para que no desaparezcan al refrescar.
+  // En una versión con Supabase, esta parte se sustituiría por inserts/selects a la tabla reviews.
+  const REVIEWS_STORAGE_KEY = "amc_work_reviews_v1";
+
+  const defaultReviewsByWork = {
+    padre: [],
+    espejo: [],
+    ruisenor: [],
+    antigona: []
+  };
+
+  function loadReviewsFromStorage() {
+    try {
+      const storedReviews = localStorage.getItem(REVIEWS_STORAGE_KEY);
+
+      if (!storedReviews) {
+        return { ...defaultReviewsByWork };
+      }
+
+      return {
+        ...defaultReviewsByWork,
+        ...JSON.parse(storedReviews)
+      };
+    } catch (error) {
+      console.warn("No se pudieron cargar las reseñas guardadas:", error);
+      return { ...defaultReviewsByWork };
+    }
+  }
+
+  function saveReviewsToStorage() {
+    localStorage.setItem(REVIEWS_STORAGE_KEY, JSON.stringify(reviewsByWork));
+  }
+
+  const reviewsByWork = loadReviewsFromStorage();
+
+  function openWorkModal(workKey) {
+    const work = worksData[workKey];
+    if (!work) return;
+
+    activeWorkKey = workKey;
+    activeSlide = 0;
+    selectedRating = 0;
+
+    workModalTitle.textContent = work.title;
+    workModalDescription.textContent = work.description;
+
+    updateWorkSlide();
+    renderReviews();
+    resetReviewForm();
+
+    workModal.classList.add("active");
+    workModal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+  }
+
+  function closeWorkModal() {
+    workModal.classList.remove("active");
+    workModal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+  }
+
+  function updateWorkSlide() {
+    const work = worksData[activeWorkKey];
+    if (!work) return;
+
+    const imageSrc = work.images[activeSlide];
+
+    workModalImage.src = imageSrc;
+    workModalImage.alt = `${work.title} - imagen ${activeSlide + 1}`;
+
+    renderDots();
+  }
+
+  function renderDots() {
+    const work = worksData[activeWorkKey];
+    if (!work) return;
+
+    workSliderDots.innerHTML = "";
+
+    work.images.forEach((_, index) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.setAttribute("aria-label", `Ver imagen ${index + 1}`);
+
+      if (index === activeSlide) {
+        dot.classList.add("active");
+      }
+
+      dot.addEventListener("click", () => {
+        activeSlide = index;
+        updateWorkSlide();
+      });
+
+      workSliderDots.appendChild(dot);
+    });
+  }
+
+  function changeSlide(direction) {
+    const work = worksData[activeWorkKey];
+    if (!work) return;
+
+    if (direction === "next") {
+      activeSlide = (activeSlide + 1) % work.images.length;
+    } else {
+      activeSlide = (activeSlide - 1 + work.images.length) % work.images.length;
+    }
+
+    updateWorkSlide();
+  }
+
+  function setRating(value) {
+    selectedRating = value;
+
+    starButtons.forEach(button => {
+      const buttonValue = Number(button.dataset.value);
+
+      if (buttonValue <= selectedRating) {
+        button.classList.add("active");
+      } else {
+        button.classList.remove("active");
+      }
+    });
+  }
+
+  function resetReviewForm() {
+    reviewForm.reset();
+    setRating(0);
+  }
+
+  function renderReviews() {
+    const reviews = reviewsByWork[activeWorkKey] || [];
+
+    reviewsList.innerHTML = "";
+
+    if (reviews.length === 0) {
+      const emptyMessage = document.createElement("p");
+      emptyMessage.classList.add("reviews-empty");
+      emptyMessage.textContent = "Aún no hay comentarios. Sé la primera persona en escribir una reseña.";
+      reviewsList.appendChild(emptyMessage);
+      return;
+    }
+
+    reviews.forEach(review => {
+      const reviewCard = document.createElement("article");
+      reviewCard.classList.add("review-card");
+
+      const reviewTop = document.createElement("div");
+      reviewTop.classList.add("review-card__top");
+
+      const reviewAuthor = document.createElement("span");
+      reviewAuthor.classList.add("review-card__name");
+      reviewAuthor.textContent = review.name;
+
+      const reviewStars = document.createElement("span");
+      reviewStars.classList.add("review-card__stars");
+      reviewStars.textContent = "★".repeat(review.rating) + "☆".repeat(5 - review.rating);
+
+      const reviewParagraph = document.createElement("p");
+      reviewParagraph.textContent = review.text;
+
+      reviewTop.appendChild(reviewAuthor);
+      reviewTop.appendChild(reviewStars);
+      reviewCard.appendChild(reviewTop);
+      reviewCard.appendChild(reviewParagraph);
+
+      reviewsList.appendChild(reviewCard);
+    });
+  }
+
+  workOpenBtns.forEach(button => {
+    button.addEventListener("click", () => {
+      const workKey = button.dataset.work;
+      openWorkModal(workKey);
+    });
+  });
+
+  workModalClose.addEventListener("click", closeWorkModal);
+  workModalOverlay.addEventListener("click", closeWorkModal);
+
+  workSlideNext.addEventListener("click", () => changeSlide("next"));
+  workSlidePrev.addEventListener("click", () => changeSlide("prev"));
+
+  starButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      setRating(Number(button.dataset.value));
+    });
+  });
+
+  reviewForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (!activeWorkKey) return;
+
+    const trimmedName = reviewName.value.trim();
+    const trimmedText = reviewText.value.trim();
+
+    if (!trimmedName || !trimmedText) {
+      alert("Completa tu nombre y tu reseña antes de publicar el comentario.");
+      return;
+    }
+
+    if (selectedRating === 0) {
+      alert("Selecciona una valoración con estrellas antes de publicar la reseña.");
+      return;
+    }
+
+    const newReview = {
+      name: trimmedName,
+      text: trimmedText,
+      rating: selectedRating,
+      createdAt: new Date().toISOString()
+    };
+
+    // Añadimos la reseña al principio para que se vea primero la más reciente.
+    reviewsByWork[activeWorkKey].unshift(newReview);
+    saveReviewsToStorage();
+
+    renderReviews();
+    resetReviewForm();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (!workModal.classList.contains("active")) return;
+
+    if (event.key === "Escape") {
+      closeWorkModal();
+    }
+
+    if (event.key === "ArrowRight") {
+      changeSlide("next");
+    }
+
+    if (event.key === "ArrowLeft") {
+      changeSlide("prev");
+    }
+  });
+
+    // --- Eventos: ocultar pasados y expandir información ---
+  const eventCards = document.querySelectorAll(".event-item");
+  const eventInfoButtons = document.querySelectorAll(".event-info-btn");
+  const noEventsMessage = document.getElementById("noEventsMessage");
+
+  function hidePastEvents() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    let visibleEvents = 0;
+
+    eventCards.forEach(card => {
+      const eventDateValue = card.dataset.date;
+
+      if (!eventDateValue) return;
+
+      const eventDate = new Date(eventDateValue);
+      eventDate.setHours(0, 0, 0, 0);
+
+      if (eventDate < today) {
+        card.style.display = "none";
+      } else {
+        card.style.display = "block";
+        visibleEvents++;
+      }
+    });
+
+    if (noEventsMessage) {
+      noEventsMessage.classList.toggle("active", visibleEvents === 0);
+    }
+  }
+
+  eventInfoButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      const eventCard = button.closest(".event-item");
+
+      eventCard.classList.toggle("expanded");
+
+      if (eventCard.classList.contains("expanded")) {
+        button.textContent = "Ocultar información";
+      } else {
+        button.textContent = "Más información";
+      }
+    });
+  });
+
+  hidePastEvents();
+
+
+  // ============================================
+// TEST DE CONEXIÓN CON SUPABASE
+// ============================================
+
+async function testSupabaseConnection() {
+  const { data, error } = await supabaseClient
+    .from("works")
+    .select("*")
+    .order("created_at", { ascending: true });
+
+  if (error) {
+    console.error("Error conectando con Supabase:", error);
+    return;
+  }
+
+  console.log("Conexión correcta. Obras cargadas desde Supabase:", data);
+}
+
+testSupabaseConnection();
+</script>
+
+</body>
+</html>

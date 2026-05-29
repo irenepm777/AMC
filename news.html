@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Actividades y noticias | Asociación Manuela Cortés</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Menú lateral -->
+    <aside class="side-menu" id="sideMenu">
+      <button class="close-btn" id="closeMenu" aria-label="Cerrar menú">
+        &times;
+      </button>
+      <nav class="side-nav">
+        <a href="index.html">Introducción</a>
+        <a href="resources.html">Recursos</a>
+        <a href="news.html">Actividades y noticias</a>
+        <a href="staff.html">Staff only</a>
+      </nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Header -->
+    <header class="main-header">
+      <div class="header-top">
+        <button class="menu-btn" id="openMenu" aria-label="Abrir menú">
+          ☰
+        </button>
+
+        <div class="brand">
+          <img
+            src="img/logo.png"
+            alt="Logo de la Asociación Manuela Cortés"
+            class="logo"
+          />
+          <div class="brand-text">
+            <p class="brand-name">Asociación Manuela Cortés</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero noticias -->
+      <section class="news-hero">
+        <div class="container">
+          <p class="hero-tag">Actualidad de la asociación</p>
+          <h1>Actividades y noticias</h1>
+          <p>
+            Espacio dedicado a compartir novedades, encuentros,
+            representaciones, actividades culturales y proyectos impulsados por
+            la Asociación Manuela Cortés.
+          </p>
+        </div>
+      </section>
+
+      <!-- Noticias -->
+      <section class="section">
+        <div class="container">
+          <div class="news-filters" aria-label="Filtrar noticias">
+            <button class="news-filter active" data-filter="all">Todas</button>
+            <button class="news-filter" data-filter="actividad">
+              Actividades
+            </button>
+            <button class="news-filter" data-filter="noticia">Noticias</button>
+          </div>
+
+          <!-- 
+            Las noticias se pintan desde JavaScript.
+            Ahora usa datos locales + localStorage, pero la estructura está lista
+            para sustituir loadNewsItems() por una consulta a Supabase.
+          -->
+          <div class="news-grid" id="newsGrid"></div>
+
+          <p class="no-events-message" id="noNewsMessage">
+            Actualmente no hay noticias publicadas en esta categoría.
+          </p>
+        </div>
+      </section>
+
+      <!-- MODAL DETALLE DE NOTICIA -->
+      <div class="news-modal" id="newsModal" aria-hidden="true">
+        <div class="news-modal__overlay" id="newsModalOverlay"></div>
+
+        <section
+          class="news-modal__content"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="newsModalTitle"
+        >
+          <button
+            class="news-modal__close"
+            id="newsModalClose"
+            aria-label="Cerrar noticia"
+          >
+            &times;
+          </button>
+
+          <div class="news-modal__text">
+            <p class="news-modal__meta">
+              <span id="newsModalCategory">Categoría</span>
+              <time id="newsModalDate" datetime="">Fecha</time>
+            </p>
+
+            <h2 id="newsModalTitle">Título de la noticia</h2>
+
+            <div class="news-modal__body" id="newsModalBody">
+              <p>Texto completo de la noticia.</p>
+            </div>
+          </div>
+
+          <div class="news-modal__gallery" id="newsModalGallery"></div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="main-footer">
+      <div class="container">
+        <h2>Contacto</h2>
+        <p>Email: asociacion@ejemplo.org</p>
+        <p>Teléfono: 000 000 000</p>
+        <p>Dirección: Sevilla, España</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+      // =========================
+      // SUPABASE CONFIG
+      // =========================
+
+      const SUPABASE_URL = "https://nfkhxixdybkuuppehmsa.supabase.co";
+      const SUPABASE_ANON_KEY =
+        "sb_publishable_ttCWQoFtIrFpZW7RGut8VA_uqzv0dp4";
+
+      const supabaseClient = supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY,
+      );
+
+      // =========================
+      // MENÚ LATERAL
+      // =========================
+
+      const openMenu = document.getElementById("openMenu");
+      const closeMenu = document.getElementById("closeMenu");
+      const sideMenu = document.getElementById("sideMenu");
+      const overlay = document.getElementById("overlay");
+
+      openMenu.addEventListener("click", () => {
+        sideMenu.classList.add("active");
+        overlay.classList.add("active");
+      });
+
+      closeMenu.addEventListener("click", () => {
+        sideMenu.classList.remove("active");
+        overlay.classList.remove("active");
+      });
+
+      overlay.addEventListener("click", () => {
+        sideMenu.classList.remove("active");
+        overlay.classList.remove("active");
+      });
+
+      // =========================
+      // NOTICIAS DESDE SUPABASE
+      // =========================
+
+      const newsGrid = document.getElementById("newsGrid");
+      const noNewsMessage = document.getElementById("noNewsMessage");
+      const newsFilters = document.querySelectorAll(".news-filter");
+
+      let activeNewsFilter = "all";
+      let newsItems = [];
+
+      function formatNewsDate(dateString) {
+        if (!dateString) return "Fecha pendiente";
+
+        const date = new Date(dateString + "T00:00:00");
+
+        return date.toLocaleDateString("es-ES", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        });
+      }
+
+      function getCategoryLabel(category) {
+        if (category === "actividad") return "Actividad";
+        if (category === "noticia") return "Noticia";
+        return "Noticia";
+      }
+
+      function normalizeNewsItem(item) {
+        const imageUrl =
+          item.image_url && item.image_url.trim() !== ""
+            ? item.image_url.trim()
+            : null;
+
+        return {
+          id: item.id,
+          category: item.category || "noticia",
+          categoryLabel: getCategoryLabel(item.category),
+          date: item.news_date,
+          displayDate: formatNewsDate(item.news_date),
+          title: item.title || "Noticia sin título",
+          image: imageUrl,
+          images: imageUrl ? [imageUrl] : [],
+          imageAlt: `Imagen de ${item.title || "noticia"}`,
+          excerpt: item.excerpt || "Resumen pendiente de completar.",
+          body: item.body
+            ? item.body
+                .split("\n")
+                .filter((paragraph) => paragraph.trim() !== "")
+            : ["Texto pendiente de completar."],
+        };
+      }
+
+      async function loadNewsItems() {
+        const { data, error } = await supabaseClient
+          .from("news")
+          .select("*")
+          .eq("is_published", true)
+          .order("news_date", { ascending: false });
+
+        if (error) {
+          console.error("Error cargando noticias desde Supabase:", error);
+
+          newsGrid.innerHTML = `
+        <article class="news-card">
+          <div class="news-content">
+            <p class="news-meta">
+              <span>Error</span>
+            </p>
+            <h2>No se pudieron cargar las noticias</h2>
+            <p class="news-excerpt">
+              Ha ocurrido un problema al conectar con la base de datos.
+            </p>
+          </div>
+        </article>
+      `;
+
+          noNewsMessage.classList.remove("active");
+          return [];
+        }
+
+        console.log("Noticias cargadas desde Supabase:", data);
+
+        return data.map(normalizeNewsItem);
+      }
+
+      function escapeHTML(text = "") {
+        return String(text)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function renderNews() {
+        const filteredNews =
+          activeNewsFilter === "all"
+            ? newsItems
+            : newsItems.filter((item) => item.category === activeNewsFilter);
+
+        newsGrid.innerHTML = "";
+
+        if (filteredNews.length === 0) {
+          noNewsMessage.classList.add("active");
+          return;
+        }
+
+        noNewsMessage.classList.remove("active");
+
+        filteredNews.forEach((item) => {
+          const article = document.createElement("article");
+          article.className = "news-card news-card--compact";
+
+          if (!item.image) {
+            article.classList.add("news-card--no-image");
+          }
+
+          article.dataset.category = item.category;
+
+          const imageBlock = item.image
+            ? `
+        <div class="news-image">
+          <img
+            src="${escapeHTML(item.image)}"
+            alt="${escapeHTML(item.imageAlt)}"
+          />
+        </div>
+      `
+            : "";
+
+          article.innerHTML = `
+      ${imageBlock}
+
+      <div class="news-content">
+        <p class="news-meta">
+          <span>${escapeHTML(item.categoryLabel)}</span>
+          <time datetime="${escapeHTML(item.date)}">${escapeHTML(item.displayDate)}</time>
+        </p>
+
+        <h2>${escapeHTML(item.title)}</h2>
+
+        <p class="news-excerpt">
+          ${escapeHTML(item.excerpt)}
+        </p>
+
+        <button class="news-read-more" type="button" data-news-id="${escapeHTML(item.id)}">
+          Leer noticia
+        </button>
+      </div>
+    `;
+
+          newsGrid.appendChild(article);
+        });
+
+        bindNewsModalButtons();
+      }
+      const newsModal = document.getElementById("newsModal");
+      const newsModalOverlay = document.getElementById("newsModalOverlay");
+      const newsModalClose = document.getElementById("newsModalClose");
+      const newsModalCategory = document.getElementById("newsModalCategory");
+      const newsModalDate = document.getElementById("newsModalDate");
+      const newsModalTitle = document.getElementById("newsModalTitle");
+      const newsModalBody = document.getElementById("newsModalBody");
+      const newsModalGallery = document.getElementById("newsModalGallery");
+
+      function bindNewsModalButtons() {
+        const newsButtons = document.querySelectorAll(".news-read-more");
+
+        newsButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            const newsId = button.dataset.newsId;
+            const newsItem = newsItems.find(
+              (item) => String(item.id) === String(newsId),
+            );
+
+            if (!newsItem) return;
+
+            openNewsModal(newsItem);
+          });
+        });
+      }
+
+      function openNewsModal(newsItem) {
+        newsModalCategory.textContent = newsItem.categoryLabel;
+        newsModalDate.textContent = newsItem.displayDate;
+        newsModalDate.setAttribute("datetime", newsItem.date);
+        newsModalTitle.textContent = newsItem.title;
+
+        newsModalBody.innerHTML = "";
+
+        newsItem.body.forEach((paragraph) => {
+          const p = document.createElement("p");
+          p.textContent = paragraph;
+          newsModalBody.appendChild(p);
+        });
+
+        renderNewsModalGallery(newsItem);
+
+        newsModal.classList.add("active");
+        newsModal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
+      }
+
+      function renderNewsModalGallery(newsItem) {
+        newsModalGallery.innerHTML = "";
+
+        const images = newsItem.images || [];
+
+        if (images.length === 0) {
+          newsModalGallery.classList.add("news-modal__gallery--empty");
+          return;
+        }
+
+        newsModalGallery.classList.remove("news-modal__gallery--empty");
+
+        images.forEach((imageUrl, index) => {
+          const imageBox = document.createElement("div");
+          imageBox.classList.add("news-modal__image");
+
+          const img = document.createElement("img");
+          img.src = imageUrl;
+          img.alt = `${newsItem.title} - imagen ${index + 1}`;
+
+          img.onerror = () => {
+            imageBox.remove();
+
+            if (!newsModalGallery.querySelector(".news-modal__image")) {
+              newsModalGallery.classList.add("news-modal__gallery--empty");
+            }
+          };
+
+          imageBox.appendChild(img);
+          newsModalGallery.appendChild(imageBox);
+        });
+      }
+
+      function closeNewsModal() {
+        newsModal.classList.remove("active");
+        newsModal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("modal-open");
+      }
+
+      newsModalClose.addEventListener("click", closeNewsModal);
+      newsModalOverlay.addEventListener("click", closeNewsModal);
+
+      document.addEventListener("keydown", (event) => {
+        if (!newsModal.classList.contains("active")) return;
+
+        if (event.key === "Escape") {
+          closeNewsModal();
+        }
+      });
+
+      newsFilters.forEach((button) => {
+        button.addEventListener("click", () => {
+          activeNewsFilter = button.dataset.filter;
+
+          newsFilters.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+
+          renderNews();
+        });
+      });
+
+      async function initNewsPage() {
+        newsItems = await loadNewsItems();
+        renderNews();
+      }
+
+      initNewsPage();
+    </script>
+  </body>
+</html>

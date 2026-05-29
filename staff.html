@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Staff only | Asociación Manuela Cortés</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <!-- Menú lateral -->
+    <aside class="side-menu" id="sideMenu">
+      <button class="close-btn" id="closeMenu" aria-label="Cerrar menú">
+        &times;
+      </button>
+      <nav class="side-nav">
+        <a href="index.html">Introducción</a>
+        <a href="resources.html">Recursos</a>
+        <a href="news.html">Actividades y noticias</a>
+        <a href="staff.html">Staff only</a>
+      </nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Header -->
+    <header class="main-header">
+      <div class="header-top">
+        <button class="menu-btn" id="openMenu" aria-label="Abrir menú">
+          ☰
+        </button>
+
+        <div class="brand">
+          <img
+            src="img/logo.png"
+            alt="Logo de la Asociación Manuela Cortés"
+            class="logo"
+          />
+          <div class="brand-text">
+            <p class="brand-name">Asociación Manuela Cortés</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero staff -->
+      <section class="staff-hero">
+        <div class="container">
+          <p class="hero-tag">Panel interno</p>
+          <h1>Staff only</h1>
+          <p>
+            Área privada para gestionar contenidos de la Asociación Manuela
+            Cortés: noticias, actividades y próximos eventos.
+          </p>
+        </div>
+      </section>
+
+      <!-- Login -->
+      <section class="section" id="loginSection">
+        <div class="container staff-layout">
+          <div class="staff-card staff-card--narrow">
+            <h2>Acceso privado</h2>
+            <p>
+              Inicia sesión con una cuenta autorizada para gestionar el
+              contenido de la web.
+            </p>
+
+            <form class="staff-form" id="loginForm">
+              <label for="loginEmail">Email</label>
+              <input
+                type="email"
+                id="loginEmail"
+                placeholder="correo@ejemplo.com"
+                required
+              />
+
+              <label for="loginPassword">Contraseña</label>
+              <input
+                type="password"
+                id="loginPassword"
+                placeholder="Contraseña"
+                required
+              />
+
+              <button type="submit" class="btn staff-submit">
+                Entrar al panel
+              </button>
+            </form>
+
+            <p class="staff-message" id="loginMessage"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dashboard -->
+      <section class="section staff-dashboard-section" id="dashboardSection">
+        <div class="container">
+          <div class="staff-dashboard-header">
+            <div>
+              <p class="hero-tag">Panel de administración</p>
+              <h2>Gestión de contenidos</h2>
+              <p id="staffUserEmail">Sesión iniciada</p>
+            </div>
+
+            <button class="btn staff-logout" id="logoutBtn" type="button">
+              Cerrar sesión
+            </button>
+          </div>
+
+          <div class="staff-tabs" role="tablist" aria-label="Gestión staff">
+            <button
+              class="staff-tab active"
+              type="button"
+              data-panel="newsPanel"
+            >
+              Noticias
+            </button>
+            <button class="staff-tab" type="button" data-panel="eventsPanel">
+              Eventos
+            </button>
+          </div>
+
+          <!-- Panel noticias -->
+          <section class="staff-panel active" id="newsPanel">
+            <div class="staff-card">
+              <h3>Crear noticia o actividad</h3>
+              <p>
+                Este formulario añade una nueva publicación a la sección
+                “Actividades y noticias”.
+              </p>
+
+              <form class="staff-form" id="newsForm">
+                <div class="staff-grid-2">
+                  <div>
+                    <label for="newsTitle">Título</label>
+                    <input
+                      type="text"
+                      id="newsTitle"
+                      placeholder="Título de la noticia"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label for="newsCategory">Categoría</label>
+                    <select id="newsCategory" required>
+                      <option value="noticia">Noticia</option>
+                      <option value="actividad">Actividad</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="staff-grid-2">
+                  <div>
+                    <label for="newsDate">Fecha</label>
+                    <input type="date" id="newsDate" required />
+                  </div>
+
+                  <div>
+                    <label for="newsImageUrl">URL de imagen opcional</label>
+                    <input
+                      type="text"
+                      id="newsImageUrl"
+                      placeholder="img/noticia_1.jpg o URL de Supabase Storage"
+                    />
+                  </div>
+                </div>
+
+                <label for="newsExcerpt">Resumen</label>
+                <textarea
+                  id="newsExcerpt"
+                  placeholder="Resumen breve que aparece en la tarjeta."
+                  required
+                ></textarea>
+
+                <label for="newsBody">Texto completo</label>
+                <textarea
+                  id="newsBody"
+                  placeholder="Texto completo. Puedes separar párrafos con saltos de línea."
+                  required
+                ></textarea>
+
+                <label class="staff-checkbox">
+                  <input type="checkbox" id="newsPublished" checked />
+                  Publicar inmediatamente
+                </label>
+
+                <button type="submit" class="btn staff-submit">
+                  Publicar noticia
+                </button>
+              </form>
+
+              <p class="staff-message" id="newsMessage"></p>
+            </div>
+          </section>
+
+          <!-- Panel eventos -->
+          <section class="staff-panel" id="eventsPanel">
+            <div class="staff-card">
+              <h3>Crear próximo evento</h3>
+              <p>
+                Este formulario añade un evento a la sección “Próximos eventos”
+                de la página principal.
+              </p>
+
+              <form class="staff-form" id="eventForm">
+                <div class="staff-grid-2">
+                  <div>
+                    <label for="eventTitle">Título del evento</label>
+                    <input
+                      type="text"
+                      id="eventTitle"
+                      placeholder="Representación teatral"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label for="eventWorkTitle">Obra representada</label>
+                    <input
+                      type="text"
+                      id="eventWorkTitle"
+                      placeholder="El Padre"
+                    />
+                  </div>
+                </div>
+
+                <div class="staff-grid-2">
+                  <div>
+                    <label for="eventDate">Fecha</label>
+                    <input type="date" id="eventDate" required />
+                  </div>
+
+                  <div>
+                    <label for="eventTime">Hora</label>
+                    <input type="time" id="eventTime" />
+                  </div>
+                </div>
+
+                <div class="staff-grid-2">
+                  <div>
+                    <label for="eventPlace">Lugar</label>
+                    <input
+                      type="text"
+                      id="eventPlace"
+                      placeholder="Centro cultural, teatro, salón..."
+                    />
+                  </div>
+
+                  <div>
+                    <label for="eventCity">Ciudad</label>
+                    <input type="text" id="eventCity" placeholder="Sevilla" />
+                  </div>
+                </div>
+
+                <label for="eventDescription">Descripción</label>
+                <textarea
+                  id="eventDescription"
+                  placeholder="Información adicional del evento."
+                ></textarea>
+
+                <label class="staff-checkbox">
+                  <input type="checkbox" id="eventPublished" checked />
+                  Publicar inmediatamente
+                </label>
+
+                <button type="submit" class="btn staff-submit">
+                  Crear evento
+                </button>
+              </form>
+
+              <p class="staff-message" id="eventMessage"></p>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="main-footer">
+      <div class="container">
+        <h2>Contacto</h2>
+        <p>Email: asociacion@ejemplo.org</p>
+        <p>Teléfono: 000 000 000</p>
+        <p>Dirección: Sevilla, España</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+      // =========================
+      // SUPABASE CONFIG
+      // =========================
+
+      const SUPABASE_URL = "https://nfkhxixdybkuuppehmsa.supabase.co";
+      const SUPABASE_ANON_KEY =
+        "sb_publishable_ttCWQoFtIrFpZW7RGut8VA_uqzv0dp4";
+
+      const supabaseClient = supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY,
+      );
+
+      // =========================
+      // MENÚ LATERAL
+      // =========================
+
+      const openMenu = document.getElementById("openMenu");
+      const closeMenu = document.getElementById("closeMenu");
+      const sideMenu = document.getElementById("sideMenu");
+      const overlay = document.getElementById("overlay");
+
+      openMenu.addEventListener("click", () => {
+        sideMenu.classList.add("active");
+        overlay.classList.add("active");
+      });
+
+      closeMenu.addEventListener("click", () => {
+        sideMenu.classList.remove("active");
+        overlay.classList.remove("active");
+      });
+
+      overlay.addEventListener("click", () => {
+        sideMenu.classList.remove("active");
+        overlay.classList.remove("active");
+      });
+
+      // =========================
+      // UTILIDADES
+      // =========================
+
+      function slugify(text) {
+        return text
+          .toString()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()
+          .trim()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "");
+      }
+
+      function showMessage(element, text, type = "success") {
+        element.textContent = text;
+        element.classList.remove("success", "error");
+        element.classList.add(type);
+      }
+
+      function clearMessage(element) {
+        element.textContent = "";
+        element.classList.remove("success", "error");
+      }
+
+      // =========================
+      // ELEMENTOS STAFF
+      // =========================
+
+      const loginSection = document.getElementById("loginSection");
+      const dashboardSection = document.getElementById("dashboardSection");
+      const staffUserEmail = document.getElementById("staffUserEmail");
+
+      const loginForm = document.getElementById("loginForm");
+      const loginEmail = document.getElementById("loginEmail");
+      const loginPassword = document.getElementById("loginPassword");
+      const loginMessage = document.getElementById("loginMessage");
+
+      const logoutBtn = document.getElementById("logoutBtn");
+
+      const staffTabs = document.querySelectorAll(".staff-tab");
+      const staffPanels = document.querySelectorAll(".staff-panel");
+
+      const newsForm = document.getElementById("newsForm");
+      const newsMessage = document.getElementById("newsMessage");
+
+      const eventForm = document.getElementById("eventForm");
+      const eventMessage = document.getElementById("eventMessage");
+
+      // =========================
+      // AUTENTICACIÓN
+      // =========================
+
+      async function checkSession() {
+        const { data, error } = await supabaseClient.auth.getSession();
+
+        if (error) {
+          console.error("Error comprobando sesión:", error);
+          showLoggedOut();
+          return;
+        }
+
+        const session = data.session;
+
+        if (session) {
+          showLoggedIn(session.user);
+        } else {
+          showLoggedOut();
+        }
+      }
+
+      function showLoggedIn(user) {
+        loginSection.style.display = "none";
+        dashboardSection.style.display = "block";
+        staffUserEmail.textContent = `Sesión iniciada como ${user.email}`;
+      }
+
+      function showLoggedOut() {
+        loginSection.style.display = "block";
+        dashboardSection.style.display = "none";
+        staffUserEmail.textContent = "";
+      }
+
+      loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        clearMessage(loginMessage);
+
+        const { data, error } = await supabaseClient.auth.signInWithPassword({
+          email: loginEmail.value.trim(),
+          password: loginPassword.value,
+        });
+
+        if (error) {
+          console.error("Error de login:", error);
+          showMessage(
+            loginMessage,
+            "No se ha podido iniciar sesión. Revisa el email y la contraseña.",
+            "error",
+          );
+          return;
+        }
+
+        showMessage(loginMessage, "Sesión iniciada correctamente.", "success");
+        showLoggedIn(data.user);
+      });
+
+      logoutBtn.addEventListener("click", async () => {
+        await supabaseClient.auth.signOut();
+        showLoggedOut();
+      });
+
+      // =========================
+      // TABS STAFF
+      // =========================
+
+      staffTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const targetPanelId = tab.dataset.panel;
+
+          staffTabs.forEach((btn) => btn.classList.remove("active"));
+          staffPanels.forEach((panel) => panel.classList.remove("active"));
+
+          tab.classList.add("active");
+          document.getElementById(targetPanelId).classList.add("active");
+        });
+      });
+
+      // =========================
+      // CREAR NOTICIAS
+      // =========================
+
+      newsForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        clearMessage(newsMessage);
+
+        const title = document.getElementById("newsTitle").value.trim();
+        const category = document.getElementById("newsCategory").value;
+        const newsDate = document.getElementById("newsDate").value;
+        const imageUrl = document.getElementById("newsImageUrl").value.trim();
+        const excerpt = document.getElementById("newsExcerpt").value.trim();
+        const body = document.getElementById("newsBody").value.trim();
+        const isPublished = document.getElementById("newsPublished").checked;
+
+        const slug = `${slugify(title)}-${Date.now()}`;
+
+        const { error } = await supabaseClient.from("news").insert({
+          title,
+          slug,
+          category,
+          news_date: newsDate,
+          excerpt,
+          body,
+          image_url: imageUrl || null,
+          is_published: isPublished,
+        });
+
+        if (error) {
+          console.error("Error creando noticia:", error);
+          showMessage(
+            newsMessage,
+            "No se ha podido crear la noticia. Revisa los datos o los permisos.",
+            "error",
+          );
+          return;
+        }
+
+        showMessage(
+          newsMessage,
+          "Noticia creada correctamente. Ya aparecerá en la web pública si está publicada.",
+          "success",
+        );
+
+        newsForm.reset();
+        document.getElementById("newsPublished").checked = true;
+      });
+
+      // =========================
+      // CREAR EVENTOS
+      // =========================
+
+      eventForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        clearMessage(eventMessage);
+
+        const title = document.getElementById("eventTitle").value.trim();
+        const workTitle = document
+          .getElementById("eventWorkTitle")
+          .value.trim();
+        const eventDate = document.getElementById("eventDate").value;
+        const eventTime = document.getElementById("eventTime").value;
+        const place = document.getElementById("eventPlace").value.trim();
+        const city = document.getElementById("eventCity").value.trim();
+        const description = document
+          .getElementById("eventDescription")
+          .value.trim();
+        const isPublished = document.getElementById("eventPublished").checked;
+
+        const { error } = await supabaseClient.from("events").insert({
+          title,
+          event_date: eventDate,
+          event_time: eventTime || null,
+          work_title: workTitle || null,
+          place: place || null,
+          city: city || null,
+          description: description || null,
+          is_published: isPublished,
+        });
+
+        if (error) {
+          console.error("Error creando evento:", error);
+          showMessage(
+            eventMessage,
+            "No se ha podido crear el evento. Revisa los datos o los permisos.",
+            "error",
+          );
+          return;
+        }
+
+        showMessage(
+          eventMessage,
+          "Evento creado correctamente. Aparecerá en la página principal si la fecha es futura y está publicado.",
+          "success",
+        );
+
+        eventForm.reset();
+        document.getElementById("eventPublished").checked = true;
+      });
+
+      checkSession();
+    </script>
+  </body>
+</html>

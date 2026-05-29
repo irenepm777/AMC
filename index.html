@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asociación Manuela Cortés</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Menú lateral -->
+  <aside class="side-menu" id="sideMenu">
+    <button class="close-btn" id="closeMenu" aria-label="Cerrar menú">&times;</button>
+    <nav class="side-nav">
+      <a href="index.html">Introducción</a>
+      <a href="resources.html">Recursos</a>
+      <a href="news.html">Actividades y noticias</a>
+      <a href="staff.html">Staff only</a>
+    </nav>
+  </aside>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Header / nav horizontal -->
+<header class="main-header">
+  <div class="header-top">
+    <button class="menu-btn" id="openMenu" aria-label="Abrir menú">☰</button>
+
+    <div class="brand">
+      <img src="img/logo.png" alt="Logo de la Asociación Manuela Cortés" class="logo">
+      <div class="brand-text">
+        <p class="brand-name">Asociación Manuela Cortés</p>
+      </div>
+    </div>
+  </div>
+
+  <nav class="top-nav" id="topNav">
+    <a href="#hero">Sobre nosotros</a>
+    <a href="#obras">Obras</a>
+    <a href="#eventos">Eventos</a>
+    <a href="#logo">Nuestro logo</a>
+  </nav>
+</header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <p class="hero-tag">Compromiso, memoria y acción social</p>
+        <h1>Asociación Manuela Cortés</h1>
+        <p class="hero-text">
+          Agrupación de personas que pretenden fomentar la utilización de los métodos expresivo-dramáticos como medios educativos y de sensibilización y concienciación sobre temáticas sociales.
+          Algunas de las técnicas utilizadas son el teatro, movimiento corporal, música, danza, pintura, fotografía o cualquier otra metodología que ayude a lograr los objetivos planteados…
+        </p>
+        <div class="hero-buttons" role="tablist" aria-label="Sobre nosotros">
+          <button id="tab-mision" class="btn btn-tab btn-tab--active" role="tab" aria-selected="true" aria-controls="panel-mision">Misión</button>
+          <button id="tab-valores" class="btn btn-tab" role="tab" aria-selected="false" aria-controls="panel-valores">Valores</button>
+          <button id="tab-equipo" class="btn btn-tab" role="tab" aria-selected="false" aria-controls="panel-equipo">Equipo</button>
+        </div>
+
+        <!-- Paneles de pestañas -->
+        <div class="tab-panels">
+          <div id="panel-mision" class="tab-panel tab-panel--active" role="tabpanel" aria-labelledby="tab-mision">
+            <h3>Nuestra misión</h3>
+            <p>Fomentamos el uso de métodos expresivo-dramáticos como herramienta educativa y de sensibilización social, promoviendo la igualdad, la memoria histórica y la concienciación ciudadana a través del arte.</p>
+          </div>
+          <div id="panel-valores" class="tab-panel" role="tabpanel" aria-labelledby="tab-valores">
+            <h3>Nuestros valores</h3>
+            <p>Nos guiamos por el compromiso, la creatividad, la solidaridad y el feminismo. Creemos en el poder transformador del arte colectivo y en la dignidad de cada persona que forma parte de nuestra comunidad.</p>
+          </div>
+          <div id="panel-equipo" class="tab-panel" role="tabpanel" aria-labelledby="tab-equipo">
+            <h3>Nuestro equipo</h3>
+            <p>Somos un grupo diverso de personas con vocación artística y social: actores, educadores, músicos y activistas unidos por el deseo de generar cambio a través de la expresión creativa.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OBRAS EN CARRUSEL -->
+    <section class="section" id="obras">
+      <div class="container">
+        <h2 class="section-title">Nuestros proyectos</h2>
+        <p class="section-subtitle">
+          Algunas de las iniciativas y proyectos que forman parte de nuestra labor.
+        </p>
+
+        <div class="carousel">
+          <button class="carousel-btn prev" id="prevCard" aria-label="Obra anterior">&#10094;</button>
+
+          <div class="carousel-track-container">
+            <div class="carousel-track" id="carouselTrack">
+  <article class="card active">
+    <div class="card-text">
+      <h3>Cargando obras...</h3>
+      <p>Estamos preparando la información de la asociación.</p>
+    </div>
+    <div class="card-image">
+      <img src="img/logo.png" alt="Logo Asociación Manuela Cortés">
+    </div>
+  </article>
+</div>
+          </div>
+
+          <button class="carousel-btn next" id="nextCard" aria-label="Siguiente obra">&#10095;</button>
+        </div>
+      </div>
+    </section>
+
+  <!-- Eventos -->
+<section class="section alt-section" id="eventos">
+  <div class="container">
+    <h2 class="section-title">Próximos eventos</h2>
+    <p class="section-subtitle">
+      Consulta las próximas actividades en las que participará la asociación.
+    </p>
+
+  <div class="events-list" id="eventsList">
+  <article class="event-item">
+    <div class="event-main">
+      <div>
+        <p class="event-date">Cargando eventos...</p>
+        <h3>Estamos preparando la agenda</h3>
+        <p>Próximamente</p>
+      </div>
+    </div>
+  </article>
+</div>
+
+    <p class="no-events-message" id="noEventsMessage">
+      Actualmente no hay próximos eventos programados.
+    </p>
+  </div>
+</section>
+
+    <!-- Logo -->
+<section class="section" id="logo">
+  <div class="container logo-section">
+    
+    <div class="logo-interactive">
+      <!-- Capa 1: Logo base en blanco -->
+      <img src="img/logo_blanco.png" alt="Logo Asociación Manuela Cortés" class="logo-layer logo-base">
+      
+      <!-- Capa 2: Color morado (recortado a la izquierda) -->
+      <div class="logo-layer logo-color logo-color--purple" data-side="purple">
+        <img src="img/logo_morado.png" alt="">
+        <div class="keywords keywords--purple">
+          <span>Feminidad</span>
+          <span>Feminismo</span>
+          <span>Paradas</span>
+          <span>Memoria</span>
+        </div>
+      </div>
+      
+      <!-- Capa 3: Color verde (recortado a la derecha) -->
+      <div class="logo-layer logo-color logo-color--green" data-side="green">
+        <img src="img/logo_verde.png" alt="">
+        <div class="keywords keywords--green">
+          <span>Esperanza</span>
+          <span>Creatividad</span>
+          <span>Campo andaluz</span>
+          <span>Generosidad</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="logo-text-box">
+      <h2 class="section-title">El significado de nuestro logo</h2>
+      <p class="logo-intro">
+        Símbolo de cambio y transformación, como la propia Asociación que irá mutando a través de los diferentes proyectos, así como expresión de la libertad de creación. También sugiere la unión de dos personas representando el carácter colaborativo de la propuesta asociativa.
+      </p>
+      <p><strong>Pasa el ratón por el logo</strong> para descubrir qué simboliza cada color.</p>
+    </div>
+    
+  </div>
+</section>
+
+<!-- MODAL DETALLE DE OBRA -->
+<div class="work-modal" id="workModal" aria-hidden="true">
+  <div class="work-modal__overlay" id="workModalOverlay"></div>
+
+  <section class="work-modal__content" role="dialog" aria-modal="true" aria-labelledby="workModalTitle">
+    <button class="work-modal__close" id="workModalClose" aria-label="Cerrar ventana">&times;</button>
+
+    <div class="work-modal__grid">
+      <!-- Slides -->
+      <div class="work-slider">
+        <button class="work-slider__btn work-slider__btn--prev" id="workSlidePrev" aria-label="Imagen anterior">&#10094;</button>
+
+        <div class="work-slider__image-box">
+          <img id="workModalImage" src="" alt="">
+        </div>
+
+        <button class="work-slider__btn work-slider__btn--next" id="workSlideNext" aria-label="Imagen siguiente">&#10095;</button>
+
+        <div class="work-slider__dots" id="workSliderDots"></div>
+      </div>
+
+      <!-- Texto -->
+      <div class="work-detail">
+        <p class="work-detail__tag">Obra de la asociación</p>
+        <h2 id="workModalTitle">Título de la obra</h2>
+        <p id="workModalDescription">
+          Descripción extensa de la obra.
+        </p>
+      </div>
+    </div>
+
+    <!-- Comentarios -->
+    <div class="work-comments">
+      <div class="work-comments__header">
+        <h3>Comentarios y reseñas</h3>
+        <p>Comparte tu opinión sobre esta obra.</p>
+      </div>
+
+      <form class="review-form" id="reviewForm">
+        <div class="review-form__row">
+          <input type="text" id="reviewName" placeholder="Tu nombre" required>
+
+          <div class="star-rating" id="starRating" aria-label="Valoración con estrellas">
+            <button type="button" data-value="1" aria-label="1 estrella">★</button>
+            <button type="button" data-value="2" aria-label="2 estrellas">★</button>
+            <button type="button" data-value="3" aria-label="3 estrellas">★</button>
+            <button type="button" data-value="4" aria-label="4 estrellas">★</button>
+            <button type="button" data-value="5" aria-label="5 estrellas">★</button>
+          </div>
+        </div>
+
+        <textarea id="reviewText" placeholder="Escribe tu reseña..." required></textarea>
+
+        <button type="submit" class="btn review-submit">Publicar comentario</button>
+      </form>
+
+      <div class="reviews-list" id="reviewsList">
+        <p class="reviews-empty">Aún no hay comentarios. Sé la primera persona en escribir una reseña.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+  <!-- Footer -->
+  <footer class="main-footer" id="contacto">
+    <div class="container">
+      <h2>Contacto</h2>
+      <p>Email: asociacionmanuelacortes@gmail.com</p>
+      <p>Teléfono: 623187142</p>
+      <p>Dirección: Sevilla, España</p>
+    </div>
+  </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  // ============================================
+  // SUPABASE CONFIG
+  // ============================================
+
+  const SUPABASE_URL = "https://nfkhxixdybkuuppehmsa.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_ttCWQoFtIrFpZW7RGut8VA_uqzv0dp4";
+
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // ============================================
+  // MENÚ LATERAL
+  // ============================================
+
+  const openMenu = document.getElementById("openMenu");
+  const closeMenu = document.getElementById("closeMenu");
+  const sideMenu = document.getElementById("sideMenu");
+  const overlay = document.getElementById("overlay");
+
+  openMenu.addEventListener("click", () => {
+    sideMenu.classList.add("active");
+    overlay.classList.add("active");
+  });
+
+  closeMenu.addEventListener("click", () => {
+    sideMenu.classList.remove("active");
+    overlay.classList.remove("active");
+  });
+
+  overlay.addEventListener("click", () => {
+    sideMenu.classList.remove("active");
+    overlay.classList.remove("active");
+  });
+
+  // ============================================
+  // NAV SUPERIOR OCULTABLE
+  // ============================================
+
+  const topNav = document.getElementById("topNav");
+
+  let lastScrollY = window.scrollY;
+  let navHidden = false;
+  let downDistance = 0;
+  let upDistance = 0;
+
+  const TOP_SAFE_ZONE = 80;
+  const HIDE_TRIGGER = 30;
+  const SHOW_TRIGGER = 40;
+
+  window.addEventListener("scroll", () => {
+    const currentScrollY = window.scrollY;
+    const delta = currentScrollY - lastScrollY;
+
+    if (currentScrollY <= TOP_SAFE_ZONE) {
+      topNav.classList.remove("hide");
+      navHidden = false;
+      downDistance = 0;
+      upDistance = 0;
+      lastScrollY = currentScrollY;
+      return;
+    }
+
+    if (Math.abs(delta) < 2) {
+      lastScrollY = currentScrollY;
+      return;
+    }
+
+    if (delta > 0) {
+      downDistance += delta;
+      upDistance = 0;
+
+      if (!navHidden && downDistance >= HIDE_TRIGGER) {
+        topNav.classList.add("hide");
+        navHidden = true;
+        downDistance = 0;
+      }
+    } else {
+      upDistance += Math.abs(delta);
+      downDistance = 0;
+
+      if (navHidden && upDistance >= SHOW_TRIGGER) {
+        topNav.classList.remove("hide");
+        navHidden = false;
+        upDistance = 0;
+      }
+    }
+
+    lastScrollY = currentScrollY;
+  });
+
+  // ============================================
+  // CARRUSEL DE OBRAS DINÁMICO
+  // ============================================
+
+  const carouselTrack = document.getElementById("carouselTrack");
+  const prevBtn = document.getElementById("prevCard");
+  const nextBtn = document.getElementById("nextCard");
+
+  let cards = [];
+  let currentCard = 0;
+  let isAnimating = false;
+
+  function goToCard(newIndex, direction) {
+    if (isAnimating || !cards.length || newIndex === currentCard) return;
+
+    isAnimating = true;
+
+    const oldCard = cards[currentCard];
+    const newCard = cards[newIndex];
+
+    oldCard.classList.remove("active");
+
+    const animClass = direction === "next" ? "slide-in-right" : "slide-in-left";
+    newCard.classList.add(animClass);
+
+    newCard.addEventListener("animationend", () => {
+      newCard.classList.remove(animClass);
+      newCard.classList.add("active");
+      currentCard = newIndex;
+      isAnimating = false;
+    }, { once: true });
+  }
+
+  nextBtn.addEventListener("click", () => {
+    if (!cards.length) return;
+    goToCard((currentCard + 1) % cards.length, "next");
+  });
+
+  prevBtn.addEventListener("click", () => {
+    if (!cards.length) return;
+    goToCard((currentCard - 1 + cards.length) % cards.length, "prev");
+  });
+
+  async function loadWorksFromSupabase() {
+    const { data, error } = await supabaseClient
+      .from("works")
+      .select("*")
+      .eq("is_active", true)
+      .order("created_at", { ascending: true });
+
+    if (error) {
+      console.error("Error cargando obras desde Supabase:", error);
+
+      carouselTrack.innerHTML = `
+        <article class="card active">
+          <div class="card-text">
+            <h3>No se pudieron cargar las obras</h3>
+            <p>Ha ocurrido un problema al conectar con la base de datos.</p>
+          </div>
+          <div class="card-image">
+            <img src="img/logo.png" alt="Logo Asociación Manuela Cortés">
+          </div>
+        </article>
+      `;
+
+      cards = document.querySelectorAll(".carousel-track .card");
+      return;
+    }
+
+    console.log("Obras cargadas desde Supabase:", data);
+
+    renderWorksCarousel(data);
+    updateWorksDataFromSupabase(data);
+  }
+
+  function renderWorksCarousel(works) {
+    carouselTrack.innerHTML = "";
+
+    if (!works || works.length === 0) {
+      carouselTrack.innerHTML = `
+        <article class="card active">
+          <div class="card-text">
+            <h3>No hay obras disponibles</h3>
+            <p>Actualmente no hay obras publicadas.</p>
+          </div>
+          <div class="card-image">
+            <img src="img/logo.png" alt="Logo Asociación Manuela Cortés">
+          </div>
+        </article>
+      `;
+
+      cards = document.querySelectorAll(".carousel-track .card");
+      return;
+    }
+
+    works.forEach((work, index) => {
+      const article = document.createElement("article");
+      article.classList.add("card");
+
+      if (index === 0) {
+        article.classList.add("active");
+      }
+
+      const cardText = document.createElement("div");
+      cardText.classList.add("card-text");
+
+      const title = document.createElement("h3");
+      title.textContent = work.title;
+
+      const description = document.createElement("p");
+      description.textContent = work.short_description || "Descripción pendiente de completar.";
+
+      const button = document.createElement("button");
+      button.classList.add("card-link", "work-open-btn");
+      button.type = "button";
+      button.dataset.work = work.slug;
+      button.textContent = "Saber más";
+
+      cardText.appendChild(title);
+      cardText.appendChild(description);
+      cardText.appendChild(button);
+
+      const cardImage = document.createElement("div");
+      cardImage.classList.add("card-image");
+
+      const image = document.createElement("img");
+      image.src = work.cover_image_url || "img/logo.png";
+      image.alt = `Imagen de ${work.title}`;
+
+      cardImage.appendChild(image);
+
+      article.appendChild(cardText);
+      article.appendChild(cardImage);
+
+      carouselTrack.appendChild(article);
+    });
+
+    cards = document.querySelectorAll(".carousel-track .card");
+    currentCard = 0;
+    isAnimating = false;
+
+    attachWorkModalEvents();
+  }
+
+  // ============================================
+  // LOGO INTERACTIVO
+  // ============================================
+
+  const logoInteractive = document.querySelector(".logo-interactive");
+  const purpleLayer = document.querySelector(".logo-color--purple");
+  const greenLayer = document.querySelector(".logo-color--green");
+
+  if (logoInteractive && purpleLayer && greenLayer) {
+    logoInteractive.addEventListener("mousemove", (e) => {
+      const rect = logoInteractive.getBoundingClientRect();
+      const relX = e.clientX - rect.left;
+      const relY = (e.clientY - rect.top) / rect.height;
+      const boundary = rect.width * (0.58 - 0.16 * relY);
+
+      if (relX < boundary) {
+        purpleLayer.classList.add("active");
+        greenLayer.classList.remove("active");
+      } else {
+        greenLayer.classList.add("active");
+        purpleLayer.classList.remove("active");
+      }
+    });
+
+    logoInteractive.addEventListener("mouseleave", () => {
+      purpleLayer.classList.remove("active");
+      greenLayer.classList.remove("active");
+    });
+  }
+
+  // ============================================
+  // PESTAÑAS HERO
+  // ============================================
+
+  const tabBtns = document.querySelectorAll('[role="tab"]');
+  const tabPanels = document.querySelectorAll(".tab-panel");
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const targetId = btn.getAttribute("aria-controls");
+
+      tabBtns.forEach(b => {
+        b.classList.remove("btn-tab--active");
+        b.setAttribute("aria-selected", "false");
+      });
+
+      tabPanels.forEach(p => p.classList.remove("tab-panel--active"));
+
+      btn.classList.add("btn-tab--active");
+      btn.setAttribute("aria-selected", "true");
+
+      const panel = document.getElementById(targetId);
+      panel.classList.add("tab-panel--active");
+    });
+  });
+
+  // ============================================
+  // MODAL DE OBRAS + SLIDER
+  // ============================================
+
+  const worksData = {};
+
+  function updateWorksDataFromSupabase(works) {
+    works.forEach(work => {
+      worksData[work.slug] = {
+        title: work.title,
+        description: work.long_description || work.short_description || "Descripción pendiente de completar.",
+        images: [
+          work.cover_image_url || "img/logo.png"
+        ]
+      };
+    });
+  }
+
+  function attachWorkModalEvents() {
+    const workOpenBtns = document.querySelectorAll(".work-open-btn");
+
+    workOpenBtns.forEach(button => {
+      button.addEventListener("click", () => {
+        const workKey = button.dataset.work;
+        openWorkModal(workKey);
+      });
+    });
+  }
+
+  const workModal = document.getElementById("workModal");
+  const workModalOverlay = document.getElementById("workModalOverlay");
+  const workModalClose = document.getElementById("workModalClose");
+  const workModalTitle = document.getElementById("workModalTitle");
+  const workModalDescription = document.getElementById("workModalDescription");
+  const workModalImage = document.getElementById("workModalImage");
+  const workSlidePrev = document.getElementById("workSlidePrev");
+  const workSlideNext = document.getElementById("workSlideNext");
+  const workSliderDots = document.getElementById("workSliderDots");
+
+  const reviewForm = document.getElementById("reviewForm");
+  const reviewName = document.getElementById("reviewName");
+  const reviewText = document.getElementById("reviewText");
+  const reviewsList = document.getElementById("reviewsList");
+  const starButtons = document.querySelectorAll("#starRating button");
+
+  let activeWorkKey = null;
+  let activeSlide = 0;
+  let selectedRating = 0;
+
+  const REVIEWS_STORAGE_KEY = "amc_work_reviews_v1";
+
+  const defaultReviewsByWork = {
+    padre: [],
+    espejo: [],
+    ruisenor: [],
+    antigona: []
+  };
+
+  function loadReviewsFromStorage() {
+    try {
+      const storedReviews = localStorage.getItem(REVIEWS_STORAGE_KEY);
+
+      if (!storedReviews) {
+        return { ...defaultReviewsByWork };
+      }
+
+      return {
+        ...defaultReviewsByWork,
+        ...JSON.parse(storedReviews)
+      };
+    } catch (error) {
+      console.warn("No se pudieron cargar las reseñas guardadas:", error);
+      return { ...defaultReviewsByWork };
+    }
+  }
+
+  function saveReviewsToStorage() {
+    localStorage.setItem(REVIEWS_STORAGE_KEY, JSON.stringify(reviewsByWork));
+  }
+
+  const reviewsByWork = loadReviewsFromStorage();
+
+  function openWorkModal(workKey) {
+    const work = worksData[workKey];
+
+    if (!work) {
+      console.warn("No se encontró la obra:", workKey);
+      return;
+    }
+
+    activeWorkKey = workKey;
+    activeSlide = 0;
+    selectedRating = 0;
+
+    workModalTitle.textContent = work.title;
+    workModalDescription.textContent = work.description;
+
+    updateWorkSlide();
+    renderReviews();
+    resetReviewForm();
+
+    workModal.classList.add("active");
+    workModal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+  }
+
+  function closeWorkModal() {
+    workModal.classList.remove("active");
+    workModal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+  }
+
+  function updateWorkSlide() {
+    const work = worksData[activeWorkKey];
+
+    if (!work) return;
+
+    const imageSrc = work.images[activeSlide];
+
+    workModalImage.src = imageSrc;
+    workModalImage.alt = `${work.title} - imagen ${activeSlide + 1}`;
+
+    renderDots();
+  }
+
+  function renderDots() {
+    const work = worksData[activeWorkKey];
+
+    if (!work) return;
+
+    workSliderDots.innerHTML = "";
+
+    work.images.forEach((_, index) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.setAttribute("aria-label", `Ver imagen ${index + 1}`);
+
+      if (index === activeSlide) {
+        dot.classList.add("active");
+      }
+
+      dot.addEventListener("click", () => {
+        activeSlide = index;
+        updateWorkSlide();
+      });
+
+      workSliderDots.appendChild(dot);
+    });
+  }
+
+  function changeSlide(direction) {
+    const work = worksData[activeWorkKey];
+
+    if (!work || !work.images.length) return;
+
+    if (direction === "next") {
+      activeSlide = (activeSlide + 1) % work.images.length;
+    } else {
+      activeSlide = (activeSlide - 1 + work.images.length) % work.images.length;
+    }
+
+    updateWorkSlide();
+  }
+
+  function setRating(value) {
+    selectedRating = value;
+
+    starButtons.forEach(button => {
+      const buttonValue = Number(button.dataset.value);
+
+      if (buttonValue <= selectedRating) {
+        button.classList.add("active");
+      } else {
+        button.classList.remove("active");
+      }
+    });
+  }
+
+  function resetReviewForm() {
+    reviewForm.reset();
+    setRating(0);
+  }
+
+  function renderReviews() {
+    const reviews = reviewsByWork[activeWorkKey] || [];
+
+    reviewsList.innerHTML = "";
+
+    if (reviews.length === 0) {
+      const emptyMessage = document.createElement("p");
+      emptyMessage.classList.add("reviews-empty");
+      emptyMessage.textContent = "Aún no hay comentarios. Sé la primera persona en escribir una reseña.";
+      reviewsList.appendChild(emptyMessage);
+      return;
+    }
+
+    reviews.forEach(review => {
+      const reviewCard = document.createElement("article");
+      reviewCard.classList.add("review-card");
+
+      const reviewTop = document.createElement("div");
+      reviewTop.classList.add("review-card__top");
+
+      const reviewAuthor = document.createElement("span");
+      reviewAuthor.classList.add("review-card__name");
+      reviewAuthor.textContent = review.name;
+
+      const reviewStars = document.createElement("span");
+      reviewStars.classList.add("review-card__stars");
+      reviewStars.textContent = "★".repeat(review.rating) + "☆".repeat(5 - review.rating);
+
+      const reviewParagraph = document.createElement("p");
+      reviewParagraph.textContent = review.text;
+
+      reviewTop.appendChild(reviewAuthor);
+      reviewTop.appendChild(reviewStars);
+      reviewCard.appendChild(reviewTop);
+      reviewCard.appendChild(reviewParagraph);
+
+      reviewsList.appendChild(reviewCard);
+    });
+  }
+
+  workModalClose.addEventListener("click", closeWorkModal);
+  workModalOverlay.addEventListener("click", closeWorkModal);
+
+  workSlideNext.addEventListener("click", () => changeSlide("next"));
+  workSlidePrev.addEventListener("click", () => changeSlide("prev"));
+
+  starButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      setRating(Number(button.dataset.value));
+    });
+  });
+
+  reviewForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (!activeWorkKey) return;
+
+    const trimmedName = reviewName.value.trim();
+    const trimmedText = reviewText.value.trim();
+
+    if (!trimmedName || !trimmedText) {
+      alert("Completa tu nombre y tu reseña antes de publicar el comentario.");
+      return;
+    }
+
+    if (selectedRating === 0) {
+      alert("Selecciona una valoración con estrellas antes de publicar la reseña.");
+      return;
+    }
+
+    if (!reviewsByWork[activeWorkKey]) {
+      reviewsByWork[activeWorkKey] = [];
+    }
+
+    const newReview = {
+      name: trimmedName,
+      text: trimmedText,
+      rating: selectedRating,
+      createdAt: new Date().toISOString()
+    };
+
+    reviewsByWork[activeWorkKey].unshift(newReview);
+    saveReviewsToStorage();
+
+    renderReviews();
+    resetReviewForm();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (!workModal.classList.contains("active")) return;
+
+    if (event.key === "Escape") {
+      closeWorkModal();
+    }
+
+    if (event.key === "ArrowRight") {
+      changeSlide("next");
+    }
+
+    if (event.key === "ArrowLeft") {
+      changeSlide("prev");
+    }
+  });
+
+  // ============================================
+  // EVENTOS DINÁMICOS DESDE SUPABASE
+  // ============================================
+
+  const eventsList = document.getElementById("eventsList");
+  const noEventsMessage = document.getElementById("noEventsMessage");
+
+  function formatEventDate(dateString) {
+    const date = new Date(dateString + "T00:00:00");
+
+    return date.toLocaleDateString("es-ES", {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
+  }
+
+  function formatEventTime(timeString) {
+    if (!timeString) {
+      return "Hora pendiente de confirmar";
+    }
+
+    return timeString.slice(0, 5);
+  }
+
+  async function loadEventsFromSupabase() {
+    const today = new Date().toISOString().split("T")[0];
+
+    const { data, error } = await supabaseClient
+      .from("events")
+      .select("*")
+      .eq("is_published", true)
+      .gte("event_date", today)
+      .order("event_date", { ascending: true });
+
+    if (error) {
+      console.error("Error cargando eventos:", error);
+
+      eventsList.innerHTML = `
+        <article class="event-item">
+          <div class="event-main">
+            <div>
+              <p class="event-date">No se pudieron cargar los eventos</p>
+              <h3>Ha ocurrido un problema</h3>
+              <p>Inténtalo de nuevo más tarde.</p>
+            </div>
+          </div>
+        </article>
+      `;
+
+      noEventsMessage.classList.remove("active");
+      return;
+    }
+
+    console.log("Eventos cargados desde Supabase:", data);
+    renderEvents(data);
+  }
+
+  function renderEvents(events) {
+    eventsList.innerHTML = "";
+
+    if (!events || events.length === 0) {
+      noEventsMessage.classList.add("active");
+      return;
+    }
+
+    noEventsMessage.classList.remove("active");
+
+    events.forEach(event => {
+      const article = document.createElement("article");
+      article.classList.add("event-item");
+      article.dataset.date = event.event_date;
+
+      const eventMain = document.createElement("div");
+      eventMain.classList.add("event-main");
+
+      const eventIntro = document.createElement("div");
+
+      const eventDate = document.createElement("p");
+      eventDate.classList.add("event-date");
+      eventDate.textContent = formatEventDate(event.event_date);
+
+      const eventTitle = document.createElement("h3");
+      eventTitle.textContent = event.title || "Evento de la asociación";
+
+      const eventCity = document.createElement("p");
+      eventCity.textContent = event.city || "Lugar pendiente de confirmar";
+
+      eventIntro.appendChild(eventDate);
+      eventIntro.appendChild(eventTitle);
+      eventIntro.appendChild(eventCity);
+
+      const infoButton = document.createElement("button");
+      infoButton.classList.add("btn", "btn-small", "event-info-btn");
+      infoButton.type = "button";
+      infoButton.textContent = "Más información";
+
+      eventMain.appendChild(eventIntro);
+      eventMain.appendChild(infoButton);
+
+      const eventDetails = document.createElement("div");
+      eventDetails.classList.add("event-details");
+
+      const work = document.createElement("p");
+      work.innerHTML = `<strong>Obra:</strong> ${event.work_title || "Pendiente de confirmar"}`;
+
+      const place = document.createElement("p");
+      place.innerHTML = `<strong>Lugar:</strong> ${event.place || "Pendiente de confirmar"}`;
+
+      const hour = document.createElement("p");
+      hour.innerHTML = `<strong>Hora:</strong> ${formatEventTime(event.event_time)}`;
+
+      eventDetails.appendChild(work);
+      eventDetails.appendChild(place);
+      eventDetails.appendChild(hour);
+
+      if (event.description) {
+        const description = document.createElement("p");
+        description.innerHTML = `<strong>Descripción:</strong> ${event.description}`;
+        eventDetails.appendChild(description);
+      }
+
+      article.appendChild(eventMain);
+      article.appendChild(eventDetails);
+
+      eventsList.appendChild(article);
+
+      infoButton.addEventListener("click", () => {
+        article.classList.toggle("expanded");
+
+        if (article.classList.contains("expanded")) {
+          infoButton.textContent = "Ocultar información";
+        } else {
+          infoButton.textContent = "Más información";
+        }
+      });
+    });
+  }
+  // ============================================
+  // ARRANQUE
+  // ============================================
+
+    loadWorksFromSupabase();
+    loadEventsFromSupabase();
+</script>
+</body>
+</html>
