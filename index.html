@@ -28,7 +28,7 @@
     <button class="menu-btn" id="openMenu" aria-label="Abrir menú">☰</button>
 
     <div class="brand">
-      <img src="img/logo.png" alt="Logo de la Asociación Manuela Cortés" class="logo">
+      <img src="img/logo/logo.png" alt="Logo de la Asociación Manuela Cortés" class="logo">
       <div class="brand-text">
         <p class="brand-name">Asociación Manuela Cortés</p>
       </div>
@@ -50,8 +50,7 @@
         <p class="hero-tag">Compromiso, memoria y acción social</p>
         <h1>Asociación Manuela Cortés</h1>
         <p class="hero-text">
-          Agrupación de personas que pretenden fomentar la utilización de los métodos expresivo-dramáticos como medios educativos y de sensibilización y concienciación sobre temáticas sociales.
-          Algunas de las técnicas utilizadas son el teatro, movimiento corporal, música, danza, pintura, fotografía o cualquier otra metodología que ayude a lograr los objetivos planteados…
+          Agrupación que utiliza los métodos expresivo-dramáticos para el desarrollo de acciones de educación, sensibilización y concienciación sobre temáticas sociales
         </p>
         <div class="hero-buttons" role="tablist" aria-label="Sobre nosotros">
           <button id="tab-mision" class="btn btn-tab btn-tab--active" role="tab" aria-selected="true" aria-controls="panel-mision">Misión</button>
@@ -96,7 +95,7 @@
       <p>Estamos preparando la información de la asociación.</p>
     </div>
     <div class="card-image">
-      <img src="img/logo.png" alt="Logo Asociación Manuela Cortés">
+      <img src="img/logo/logo.png" alt="Logo Asociación Manuela Cortés">
     </div>
   </article>
 </div>
@@ -139,11 +138,11 @@
     
     <div class="logo-interactive">
       <!-- Capa 1: Logo base en blanco -->
-      <img src="img/logo_blanco.png" alt="Logo Asociación Manuela Cortés" class="logo-layer logo-base">
+      <img src="img/logo/logo_blanco.png" alt="Logo Asociación Manuela Cortés" class="logo-layer logo-base">
       
       <!-- Capa 2: Color morado (recortado a la izquierda) -->
       <div class="logo-layer logo-color logo-color--purple" data-side="purple">
-        <img src="img/logo_morado.png" alt="">
+        <img src="img/logo/logo_morado.png" alt="">
         <div class="keywords keywords--purple">
           <span>Feminidad</span>
           <span>Feminismo</span>
@@ -154,7 +153,7 @@
       
       <!-- Capa 3: Color verde (recortado a la derecha) -->
       <div class="logo-layer logo-color logo-color--green" data-side="green">
-        <img src="img/logo_verde.png" alt="">
+        <img src="img/logo/logo_verde.png" alt="">
         <div class="keywords keywords--green">
           <span>Esperanza</span>
           <span>Creatividad</span>
@@ -384,14 +383,21 @@
   });
 
   async function loadWorksFromSupabase() {
-    const { data, error } = await supabaseClient
-      .from("works")
-      .select("*")
-      .eq("is_active", true)
-      .order("created_at", { ascending: true });
+    const [worksResult, imagesResult] = await Promise.all([
+      supabaseClient
+        .from("works")
+        .select("*")
+        .eq("is_active", true)
+        .order("created_at", { ascending: true }),
 
-    if (error) {
-      console.error("Error cargando obras desde Supabase:", error);
+      supabaseClient
+        .from("work_images")
+        .select("work_id, image_url, alt_text, position")
+        .order("position", { ascending: true })
+    ]);
+
+    if (worksResult.error) {
+      console.error("Error cargando obras desde Supabase:", worksResult.error);
 
       carouselTrack.innerHTML = `
         <article class="card active">
@@ -400,7 +406,7 @@
             <p>Ha ocurrido un problema al conectar con la base de datos.</p>
           </div>
           <div class="card-image">
-            <img src="img/logo.png" alt="Logo Asociación Manuela Cortés">
+            <img src="img/logo/logo.png" alt="Logo Asociación Manuela Cortés">
           </div>
         </article>
       `;
@@ -409,10 +415,34 @@
       return;
     }
 
-    console.log("Obras cargadas desde Supabase:", data);
+    if (imagesResult.error) {
+      console.error(
+        "Error cargando imágenes de las obras desde Supabase:",
+        imagesResult.error
+      );
+    }
 
-    renderWorksCarousel(data);
-    updateWorksDataFromSupabase(data);
+    const works = worksResult.data || [];
+    const workImages = imagesResult.data || [];
+
+    const imagesByWorkId = workImages.reduce((groups, image) => {
+      if (!groups[image.work_id]) {
+        groups[image.work_id] = [];
+      }
+
+      groups[image.work_id].push(image);
+      return groups;
+    }, {});
+
+    const worksWithImages = works.map(work => ({
+      ...work,
+      work_images: imagesByWorkId[work.id] || []
+    }));
+
+    console.log("Obras cargadas desde Supabase:", worksWithImages);
+
+    renderWorksCarousel(worksWithImages);
+    updateWorksDataFromSupabase(worksWithImages);
   }
 
   function renderWorksCarousel(works) {
@@ -426,7 +456,7 @@
             <p>Actualmente no hay obras publicadas.</p>
           </div>
           <div class="card-image">
-            <img src="img/logo.png" alt="Logo Asociación Manuela Cortés">
+            <img src="img/logo/logo.png" alt="Logo Asociación Manuela Cortés">
           </div>
         </article>
       `;
@@ -466,7 +496,7 @@
       cardImage.classList.add("card-image");
 
       const image = document.createElement("img");
-      image.src = work.cover_image_url || "img/logo.png";
+      image.src = work.cover_image_url || "img/logo/logo.png";
       image.alt = `Imagen de ${work.title}`;
 
       cardImage.appendChild(image);
@@ -548,12 +578,29 @@
 
   function updateWorksDataFromSupabase(works) {
     works.forEach(work => {
+      const orderedImages = [...(work.work_images || [])]
+        .sort((a, b) => (a.position ?? 0) - (b.position ?? 0))
+        .filter(image => image.image_url)
+        .map(image => ({
+          url: image.image_url,
+          alt: image.alt_text || `Imagen de ${work.title}`
+        }));
+
       worksData[work.slug] = {
         title: work.title,
-        description: work.long_description || work.short_description || "Descripción pendiente de completar.",
-        images: [
-          work.cover_image_url || "img/logo.png"
-        ]
+        description:
+          work.long_description ||
+          work.short_description ||
+          "Descripción pendiente de completar.",
+        images:
+          orderedImages.length > 0
+            ? orderedImages
+            : [
+                {
+                  url: work.cover_image_url || "img/logo/logo.png",
+                  alt: `Imagen de ${work.title}`
+                }
+              ]
       };
     });
   }
@@ -655,12 +702,13 @@
   function updateWorkSlide() {
     const work = worksData[activeWorkKey];
 
-    if (!work) return;
+    if (!work || !work.images.length) return;
 
-    const imageSrc = work.images[activeSlide];
+    const image = work.images[activeSlide];
 
-    workModalImage.src = imageSrc;
-    workModalImage.alt = `${work.title} - imagen ${activeSlide + 1}`;
+    workModalImage.src = image.url;
+    workModalImage.alt =
+      image.alt || `${work.title} - imagen ${activeSlide + 1}`;
 
     renderDots();
   }
