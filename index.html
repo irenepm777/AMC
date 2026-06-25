@@ -37,7 +37,7 @@
 
   <nav class="top-nav" id="topNav">
     <a href="#hero">¿Quiénes somos?</a>
-    <a href="#obras">Obras</a>
+    <a href="#obras">Proyectos</a>
     <a href="#eventos">Eventos</a>
     <a href="#logo">Nuestro logo</a>
   </nav>
@@ -136,32 +136,36 @@
 <section class="section" id="logo">
   <div class="container logo-section">
     
-    <div class="logo-interactive">
-      <!-- Capa 1: Logo base en blanco -->
-      <img src="img/logo/logo_blanco.png" alt="Logo Asociación Manuela Cortés" class="logo-layer logo-base">
-      
-      <!-- Capa 2: Color morado (recortado a la izquierda) -->
-      <div class="logo-layer logo-color logo-color--purple" data-side="purple">
-        <img src="img/logo/logo_morado.png" alt="">
-        <div class="keywords keywords--purple">
-          <span>Feminidad</span>
-          <span>Feminismo</span>
-          <span>Paradas</span>
-          <span>Memoria</span>
-        </div>
-      </div>
-      
-      <!-- Capa 3: Color verde (recortado a la derecha) -->
-      <div class="logo-layer logo-color logo-color--green" data-side="green">
-        <img src="img/logo/logo_verde.png" alt="">
-        <div class="keywords keywords--green">
-          <span>Esperanza</span>
-          <span>Creatividad</span>
-          <span>Campo andaluz</span>
-          <span>Generosidad</span>
-        </div>
-      </div>
-    </div>
+<div class="logo-interactive">
+  <!-- Capa 1: Logo base en blanco -->
+  <img src="img/logo/logo_blanco.png" alt="Logo Asociación Manuela Cortés" class="logo-layer logo-base">
+
+  <!-- Capa 2: Color morado -->
+  <div class="logo-layer logo-color logo-color--purple" data-side="purple">
+    <img src="img/logo/logo_morado_2.png" alt="">
+  </div>
+
+  <!-- Capa 3: Color verde -->
+  <div class="logo-layer logo-color logo-color--green" data-side="green">
+    <img src="img/logo/logo_verde.png" alt="">
+  </div>
+
+  <!-- Palabras moradas -->
+  <div class="keywords keywords--purple">
+    <span>Feminidad</span>
+    <span>Feminismo</span>
+    <span>Paradas</span>
+    <span>Memoria</span>
+  </div>
+
+  <!-- Palabras verdes -->
+  <div class="keywords keywords--green">
+    <span>Esperanza</span>
+    <span>Creatividad</span>
+    <span>Campo andaluz</span>
+    <span>Generosidad</span>
+  </div>
+</div>
 
     <div class="logo-text-box">
       <h2 class="section-title">El significado de nuestro logo</h2>
@@ -530,18 +534,27 @@
       const boundary = rect.width * (0.58 - 0.16 * relY);
 
       if (relX < boundary) {
-        purpleLayer.classList.add("active");
-        greenLayer.classList.remove("active");
-      } else {
-        greenLayer.classList.add("active");
-        purpleLayer.classList.remove("active");
-      }
+  purpleLayer.classList.add("active");
+  greenLayer.classList.remove("active");
+
+  logoInteractive.classList.add("show-purple");
+  logoInteractive.classList.remove("show-green");
+} else {
+  greenLayer.classList.add("active");
+  purpleLayer.classList.remove("active");
+
+  logoInteractive.classList.add("show-green");
+  logoInteractive.classList.remove("show-purple");
+}
     });
 
     logoInteractive.addEventListener("mouseleave", () => {
-      purpleLayer.classList.remove("active");
-      greenLayer.classList.remove("active");
-    });
+  purpleLayer.classList.remove("active");
+  greenLayer.classList.remove("active");
+
+  logoInteractive.classList.remove("show-purple");
+  logoInteractive.classList.remove("show-green");
+});
   }
 
   // ============================================

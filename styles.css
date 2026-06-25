@@ -111,7 +111,7 @@ body {
 }
 
 .top-nav a:hover {
-  color: #8a6d3b;
+  color: #894583;
 }
 
 .menu-btn {
@@ -163,7 +163,7 @@ body {
 }
 
 .side-nav a:hover {
-  color: #8a6d3b;
+  color: #4e9563;
 }
 
 /* OVERLAY */
@@ -282,7 +282,7 @@ body {
 
 .btn-tab:hover {
   border-color: #0d3f19;
-  background-color: rgba(13, 63, 25, 0.06);
+  background-color: rgba(13, 63, 25, 0.5);
 }
 
 .btn-tab--active {
@@ -547,10 +547,21 @@ body {
 
 /* LOGO */
 .logo-section {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
+  gap: 2.5rem;
+  overflow: visible;
+}
+
+.logo-text-box {
+  max-width: 850px;
+  order: 1;
+}
+
+.logo-interactive {
+  order: 2;
 }
 
 .logo-image-box img {
@@ -707,10 +718,10 @@ body {
 /* Imagen morada */
 .logo-color--purple img {
   position: absolute;
-  top: 16%; /* ↕ mover verticalmente */
-  left: 0%; /* ↔ mover horizontalmente */
-  width: 64%;
-  height: 64%;
+  top: 15.5%; /* ↕ mover verticalmente */
+  left: -0.5%; /* ↔ mover horizontalmente */
+  width: 66.25%;
+  height: 66.25%;
   object-fit: contain;
   display: block;
 }
@@ -751,6 +762,7 @@ body {
 
 .logo-interactive {
   cursor: pointer;
+  overflow: visible;
 }
 
 /* Palabras clave */
@@ -779,7 +791,7 @@ body {
 
 /* Palabras moradas (salen a la izquierda) */
 .keywords--purple {
-  right: 105%;
+  right: 112%;
   text-align: right;
   align-items: flex-end;
 }
@@ -791,7 +803,7 @@ body {
 
 /* Palabras verdes (salen a la derecha) */
 .keywords--green {
-  left: 105%;
+  left: 112%;
   text-align: left;
   align-items: flex-start;
 }
@@ -801,11 +813,10 @@ body {
   border: 1.5px solid #1b652b;
 }
 
-/* Al activar la capa, aparecen las palabras */
-.logo-color.active .keywords {
+.logo-interactive.show-purple .keywords--purple,
+.logo-interactive.show-green .keywords--green {
   opacity: 1;
 }
-
 /* Responsive */
 @media (max-width: 900px) {
   .logo-section {
